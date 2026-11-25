@@ -13,6 +13,7 @@ export function plantPhase(id){let h=0;for(const c of id)h=(Math.imul(h,31)+c.ch
 export function plantOffset(layer,heightFraction,time,flow,wake=0){
  const p=plantProfile(layer.asset);if(!p)return 0;
  const q=clamp(1-heightFraction,0,1),phase=plantPhase(layer.id),f=clamp(flow,0,1);
+ if(q===0)return 0;
  const a=p.amplitude*Math.min(1.2,layer.h/600+.35);
  return q*q*(a*f*(.68*Math.sin(time*p.frequency+phase-q*1.6)+.24*Math.sin(time*.31+phase*.73-q*3.2)) + clamp(wake,-1,1)*a*.85);
 }
