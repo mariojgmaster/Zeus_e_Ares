@@ -15,7 +15,7 @@ export function contactPlane(map,w,h,rect,proxies,i,padding=0){
  const {x,y,dw,dh}=rect;for(const q of proxies){const r=q.r+padding;for(const [a,b] of [[0,0],[1,0],[-1,0],[0,1],[0,-1],[.7,.7],[-.7,.7],[.7,-.7],[-.7,-.7]])if(samplePacked(map,w,h,(q.x+a*r-x)/dw,(q.y+b*r-y)/dh,i)>.45)return true;}return false;
 }
 // No positional snap: only disallow the part of a proposed depth step that would cross a solid plane.
-export function guardDepthStep(z,next,blocked){for(let i=0;i<PLANES.length;i++){const p=PLANES[i];if(!blocked(i))continue;if(z<p&&next>=p)return Math.min(next,Math.max(z,p-.006));if(z>=p&&next<p)return Math.max(next,Math.min(z,p+.006));}return next;}
+export function guardDepthStep(z,next,blocked){for(let i=0;i<PLANES.length;i++){const p=PLANES[i];if(!((z<p&&next>=p)||(z>=p&&next<p)))continue;if(!blocked(i))continue;if(z<p&&next>=p)return Math.min(next,Math.max(z,p-.006));if(z>=p&&next<p)return Math.max(next,Math.min(z,p+.006));}return next;}
 export function drawLayer(ctx,im,l){ctx.save();ctx.globalAlpha=l.opacity??1;ctx.filter=`saturate(${l.saturation??1}) contrast(${l.contrast??1}) brightness(${l.shade??1}) blur(${l.blur??0}px)`;if(l.flip){ctx.translate(l.x+l.w,l.y);ctx.scale(-1,1);ctx.drawImage(im,0,0,l.w,l.h);}else ctx.drawImage(im,l.x,l.y,l.w,l.h);ctx.restore();}
 // Dynamic alpha is sampled at half resolution; the photographic planes stay native.
 export function dynamicMaskSize(w,h){return {maskW:Math.ceil(w/2),maskH:Math.ceil(h/2)};}
