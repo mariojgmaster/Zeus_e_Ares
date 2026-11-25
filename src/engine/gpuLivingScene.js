@@ -17,8 +17,10 @@ export function maskRegions(fish,rect,shift,w,h){
  });
 }
 export function overlapsRegion(rect,region,pad=24){return !!region&&rect[0]-pad<region[0]+region[2]&&rect[0]+rect[2]+pad>region[0]&&rect[1]-pad<region[1]+region[3]&&rect[1]+rect[3]+pad>region[1];}
+// Equal depth is in front of the corresponding photographic plane, matching the legacy mask contract.
+export function depthGroups(fish,occlusion=true){const sorted=[...fish].sort((a,b)=>a.z-b.z),groups=Array.from({length:PLANES.length+1},()=>[]);for(const f of sorted){let i=occlusion?PLANES.findIndex(z=>f.z<z):-1;if(i<0)i=PLANES.length;groups[i].push(f);}return groups;}
 const vs=`attribute vec2 uv;uniform vec4 local,view,motion;uniform vec2 screen,root;uniform float time,flow,maskPass;varying vec2 v,p;void main(){v=uv;p=local.xy+uv*local.zw;float q=clamp((root.x-p.y)/root.y,0.,1.);p.x+=q*q*motion.x*(flow*(.68*sin(time*motion.y+motion.z-q*1.6)+.24*sin(time*.31+motion.z*.73-q*3.2))+.85*motion.w);vec2 s=view.xy+p*view.zw;gl_Position=vec4(s/screen*vec2(2.,maskPass>.5?2.:-2.)+vec2(-1.,maskPass>.5?-1.:1.),0.,1.);}`;
-const fs=`precision highp float;varying vec2 v,p;uniform sampler2D image;uniform vec2 nativeSize;uniform vec4 tint;uniform float maskPass;void main(){if(any(lessThan(p,vec2(0.)))||any(greaterThanEqual(p,nativeSize)))discard;vec4 c=texture2D(image,v);gl_FragColor=maskPass>.5?vec4(c.a):vec4(mix(c.rgb,tint.rgb*c.a,tint.a),c.a);}`;
+const fs=`precision highp float;varying vec2 v,p;uniform sampler2D image;uniform vec2 nativeSize;uniform vec4 tint;uniform float maskPass,night;void main(){if(any(lessThan(p,vec2(0.)))||any(greaterThanEqual(p,nativeSize)))discard;vec4 c=texture2D(image,v);gl_FragColor=maskPass>.5?vec4(c.a):vec4(mix(mix(c.rgb,tint.rgb*c.a,tint.a),vec3(2.,13.,38.)/255.*c.a,night*.68),c.a);}`;
 export function createLivingRenderer(gl,source,maskOnly=false){
  const {w,h,sprites,water,optics}=source;if(!gl||gl.isContextLost()||!gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER,gl.HIGH_FLOAT)?.precision||Math.max(w,h)>gl.getParameter(gl.MAX_TEXTURE_SIZE))throw Error('GPU living unsupported');
  const tex=[],shaders=[];let prog,buf,fbo,mask,loc,U,items,waterTex,disposed=false;const rows=48,vao=gl.getExtension('OES_vertex_array_object'),stats={uploads:0,frames:0,draws:0,maskPixels:0};
@@ -28,7 +30,7 @@ export function createLivingRenderer(gl,source,maskOnly=false){
  function upload(c){const t=gl.createTexture();tex.push(t);gl.bindTexture(gl.TEXTURE_2D,t);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,c);params();stats.uploads++;return t;}
  function restore(){gl.disable(gl.SCISSOR_TEST);gl.colorMask(true,true,true,true);gl.bindFramebuffer(gl.FRAMEBUFFER,null);gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,false);gl.activeTexture(gl.TEXTURE0);gl.enable(gl.DITHER);if(loc>=0)gl.disableVertexAttribArray(loc);}
  try{prog=gl.createProgram();gl.attachShader(prog,compile(gl.VERTEX_SHADER,vs));gl.attachShader(prog,compile(gl.FRAGMENT_SHADER,fs));gl.linkProgram(prog);if(!gl.getProgramParameter(prog,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(prog));
- loc=gl.getAttribLocation(prog,'uv');U=Object.fromEntries(['local','view','motion','screen','root','time','flow','maskPass','image','nativeSize','tint'].map(k=>[k,gl.getUniformLocation(prog,k)]));
+ loc=gl.getAttribLocation(prog,'uv');U=Object.fromEntries(['local','view','motion','screen','root','time','flow','maskPass','image','nativeSize','tint','night'].map(k=>[k,gl.getUniformLocation(prog,k)]));
  const vertices=[];for(let i=0;i<=rows;i++)vertices.push(0,i/rows,1,i/rows);buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(vertices),gl.STATIC_DRAW);
  gl.activeTexture(gl.TEXTURE0);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,true);if(!maskOnly)waterTex=upload(water);
  items=sprites.map(({l,c},i)=>{if(maskOnly&&l.z===.7)return null;const p=plantProfile(l.asset);return {l,i,t:upload(c),rect:[l.x-18,l.y-18,c.width,c.height],amp:p?p.amplitude*Math.min(1.2,l.h/600+.35):0,freq:p?.frequency??0,phase:plantPhase(l.id)};}).filter(Boolean);
@@ -37,18 +39,24 @@ export function createLivingRenderer(gl,source,maskOnly=false){
  }catch(e){dispose();throw e;}finally{restore();}
  const u4=(k,v)=>gl.uniform4fv(U[k],v);
  function quad(t,local,view,motion,root,tint){gl.bindTexture(gl.TEXTURE_2D,t);u4('local',local);u4('view',view);u4('motion',motion);gl.uniform2fv(U.root,root);u4('tint',tint);gl.drawArrays(gl.TRIANGLE_STRIP,0,(rows+1)*2);}
- function draw(rect,shift,W,H,pose,regions=null){if(disposed||gl.isContextLost())throw Error('GPU unavailable');try{
- if(vao)vao.bindVertexArrayOES(null);gl.bindFramebuffer(gl.FRAMEBUFFER,maskOnly?fbo:null);gl.viewport(0,0,maskOnly?w:gl.drawingBufferWidth,maskOnly?h:gl.drawingBufferHeight);gl.useProgram(prog);gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);gl.activeTexture(gl.TEXTURE0);gl.uniform1i(U.image,0);gl.uniform2f(U.nativeSize,w,h);gl.uniform2f(U.screen,maskOnly?w:W,maskOnly?h:H);gl.uniform1f(U.maskPass,+maskOnly);gl.uniform1f(U.time,pose.time);gl.uniform1f(U.flow,pose.flow);
- gl.disable(gl.DEPTH_TEST);gl.disable(gl.CULL_FACE);gl.disable(gl.SCISSOR_TEST);gl.disable(gl.DITHER);gl.colorMask(true,true,true,true);gl.disable(gl.BLEND);gl.clearColor(maskOnly?0:9/255,maskOnly?0:40/255,maskOnly?0:46/255,maskOnly?0:1);gl.clear(gl.COLOR_BUFFER_BIT);gl.enable(gl.BLEND);gl.blendFuncSeparate(gl.ONE,gl.ONE_MINUS_SRC_ALPHA,gl.ONE,gl.ONE_MINUS_SRC_ALPHA);
+ function draw(rect,shift,W,H,pose,regions=null,ordered=null){if(disposed||gl.isContextLost())throw Error('GPU unavailable');try{
+ function bindColorState(){
+ if(vao)vao.bindVertexArrayOES(null);gl.bindFramebuffer(gl.FRAMEBUFFER,maskOnly?fbo:null);gl.viewport(0,0,maskOnly?w:gl.drawingBufferWidth,maskOnly?h:gl.drawingBufferHeight);gl.useProgram(prog);gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);gl.activeTexture(gl.TEXTURE0);gl.uniform1i(U.image,0);gl.uniform2f(U.nativeSize,w,h);gl.uniform2f(U.screen,maskOnly?w:W,maskOnly?h:H);gl.uniform1f(U.maskPass,+maskOnly);gl.uniform1f(U.time,pose.time);gl.uniform1f(U.flow,pose.flow);gl.uniform1f(U.night,ordered?.night??0);
+ gl.disable(gl.DEPTH_TEST);gl.disable(gl.CULL_FACE);gl.disable(gl.SCISSOR_TEST);gl.disable(gl.DITHER);gl.colorMask(true,true,true,true);gl.enable(gl.BLEND);gl.blendFuncSeparate(gl.ONE,gl.ONE_MINUS_SRC_ALPHA,gl.ONE,gl.ONE_MINUS_SRC_ALPHA);}
+ bindColorState();gl.clearColor(maskOnly?0:9/255,maskOnly?0:40/255,maskOnly?0:46/255,maskOnly?0:1);gl.depthMask(true);gl.clear(gl.COLOR_BUFFER_BIT|(ordered?gl.DEPTH_BUFFER_BIT:0));
+ const groups=ordered?depthGroups(ordered.fish,ordered.occlusion):null;
+ let group=0;
+ function flushFish(limit){if(!groups)return;while(group<limit){if(groups[group].length){ordered.drawFish(groups[group]);bindColorState();}group++;}}
  const view=z=>maskOnly?[0,0,1,1]:[rect.x+shift[0]*rect.dw*cameraFactor(z),rect.y+shift[1]*rect.dh*cameraFactor(z),rect.dw/w,rect.dh/h];
  const tint=z=>!optics.enabled?[0,0,0,0]:z===.7?[34/255,91/255,91/255,.16]:[39/255,101/255,99/255,[.14,.10,.065,.032][PLANES.indexOf(z)]];
  if(!maskOnly)quad(waterTex,[0,0,w,h],view(.7),[0,0,0,0],[h,h],tint(.7));
  let last=-1,region=null;stats.draws=0;stats.maskPixels=0;
  for(const {l,i,t,rect,amp,freq,phase} of items){
+  if(ordered&&l.z!==.7)flushFish(PLANES.indexOf(l.z)+1);
   if(maskOnly&&l.z!==last){last=l.z;const j=PLANES.indexOf(l.z);gl.colorMask(j===0,j===1,j===2,j===3);region=regions?regions[j]:[0,0,w,h];if(region){gl.enable(gl.SCISSOR_TEST);gl.scissor(...region);stats.maskPixels+=region[2]*region[3];}}
   if(maskOnly&&(!region||!overlapsRegion(rect,region)))continue;
   quad(t,rect,view(l.z),[amp,freq,phase,pose.wakes[i]??0],[l.y+l.h,l.h],tint(l.z));stats.draws++;
- }stats.frames++;
+ }flushFish(PLANES.length+1);stats.frames++;
  }finally{restore();}}
  return {mask,stats,draw,diagnosticMask(){if(!maskOnly)throw Error('mask renderer required');const pixels=new Uint8Array(w*h*4);gl.bindFramebuffer(gl.FRAMEBUFFER,fbo);try{gl.readPixels(0,0,w,h,gl.RGBA,gl.UNSIGNED_BYTE,pixels);return pixels;}finally{gl.bindFramebuffer(gl.FRAMEBUFFER,null);}},dispose};
 }

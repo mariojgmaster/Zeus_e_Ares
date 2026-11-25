@@ -1,2 +1,2 @@
 import {test} from 'node:test';import assert from 'node:assert/strict';import {summarize,modes} from '../src/engine/performanceLab.js';
-test('frame statistics retain tails and do not mutate samples',()=>{const a=[50,10,20,30,40];assert.deepEqual(summarize(a),{n:5,mean:30,p50:30,p95:50,p99:50,max:50});assert.deepEqual(a,[50,10,20,30,40]);assert.equal(summarize([]),null);assert.equal(modes.length,4);});
+test('frame statistics retain tails and do not mutate samples',()=>{const a=[50,10,20,30,40];assert.deepEqual(summarize(a),{n:5,mean:30,p50:30,p95:50,p99:50,max:50});assert.deepEqual(a,[50,10,20,30,40]);assert.equal(summarize([]),null);assert.equal(modes.length,6);});

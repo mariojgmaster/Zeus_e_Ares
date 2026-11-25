@@ -58,3 +58,6 @@ Tela de carregamento real e otimização de cobertura GPU. [Especificação](doc
 
 ## Performance lab (branch experimental)
 Abra /?lab=1, execute diagnóstico com aba visível e sem mexer no mouse, exporte JSON. Quatro modos, 4s warmup + 12s amostra cada. Não altera render padrão nem envia dados. Ver [ADR-009](docs/ADR-009-RENDER-PERFORMANCE.md).
+
+## P1 experimental
+Open /?unified=1 for unified scene. Open /?lab=1 for six-mode comparison; original default preserved. [P1](docs/P1-UNIFIED-RENDERER.md).
