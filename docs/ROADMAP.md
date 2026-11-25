@@ -12,7 +12,10 @@ Aquário virtual afetivo e biologicamente inspirado, offline, interativo e proce
 | 0.32.1 | Vegetation Occlusion Hotfix | Não homologada: rebarbas nas folhas e escala abrupta | 
 | 0.32.2 | Natural Occlusion & Smooth Depth | Não homologada: contornos vegetais ainda insatisfatórios | 
 | 0.32.3 | Authored Vegetation Matte | Máscara vetorial em resolução nativa; preservar correção de profundidade; candidata à homologação |
-| 0.33 | Living Vegetation | Camadas vegetais independentes, movimento orgânico e resposta aos peixes |
+| 0.33.0 | Living Habitat Parallax | 24 instâncias independentes; 5 planos; substitui máscara estática no cenário padrão |
+| 0.33.1 | Natural Color | Graduação de cores naturais, aprovada visualmente na prévia |
+| 0.33.2 | Underwater Optics | Integração dos recursos e óptica subaquática; candidata à homologação completa |
+| 0.33.3 | Living Vegetation | Movimento orgânico das folhas e resposta aos peixes |
 | 0.34 | Water Physics | Superfície, correnteza, ondulações e partículas coerentes |
 | 0.35 | Natural Lighting | Sombras e ciclo de iluminação diária |
 | 0.36 | Environmental Physics | Colisões volumétricas, refúgios, desvio e integração ambiente/biologia |

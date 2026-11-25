@@ -2,7 +2,7 @@ name: Aqua Eterna CI
 on:
   pull_request:
   push:
-    branches: [master, 'feature/mvp-0.32-react-docker']
+    branches: [master, 'feature/mvp-0.32-react-docker', 'feature/mvp-0.33-parallax']
 permissions:
   contents: read
 jobs:
