@@ -20,3 +20,6 @@ P3 release gate: representative physical hardware, frame pacing, long soak, load
 
 ## P1 implementation update
 Raw WebGL1-compatible prototype first, preserving original shader/mesh data for architecture isolation. Three.js/WebGL2 remains candidate, not installed. Two 2D overlays remain and ordering differs in P1; no visual/performance approval. Six-mode lab compares unified with earlier paths. [P1](P1-UNIFIED-RENDERER.md).
+
+## Physical evidence amendment
+P0/P1 reports received. P1 failed FPS gate; resolution/pixel budget and compositor isolation take precedence over library migration or further mask work. See [PERFORMANCE-P0-P1](PERFORMANCE-P0-P1.md). P1.1 proposed, not implemented.

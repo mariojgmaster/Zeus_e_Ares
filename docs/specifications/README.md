@@ -20,3 +20,5 @@ Toda nova decisão deve ter ID, descrição, critérios verificáveis, estado e 
 - [ADR-009](../ADR-009-RENDER-PERFORMANCE.md) — diagnóstico, alternativas de mercado e gate de lançamento.
 
 - [P1 Unified Renderer](../P1-UNIFIED-RENDERER.md) — experimental sorted GPU scene and benchmark.
+
+- [P0/P1 physical benchmarks](../PERFORMANCE-P0-P1.md) — measured results, limitations and proposed P1.1.

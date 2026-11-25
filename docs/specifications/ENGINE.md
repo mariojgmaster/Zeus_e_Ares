@@ -16,3 +16,5 @@ ENG-10: oclusão GPU por regiões conservadoras pós-simulação, sem reduzir re
 ENG-11 (proposta): performance é gate de lançamento; avaliar renderizador único WebGL2 com Three.js e alternativa raw WebGL2; PixiJS candidato 2D. Diagnóstico opt-in local, medir GPU/CPU/compositor e frame pacing. Ver [ADR-009](../ADR-009-RENDER-PERFORMANCE.md).
 
 ENG-12 (P1 experimental): one active WebGL context for color and fish; depth-ordered composition removes dynamic mask; existing WebGL1-compatible shader retained for isolation. Two Canvas2D overlays remain; validate optical ordering. Three.js/WebGL2 decision pending comparative measurement. See [P1](../P1-UNIFIED-RENDERER.md).
+
+ENG-13: hardware benchmark P0/P1 at ~8.16MP, UHD 630: 13.35 FPS living animated, 12.20 unified animated, 16.93 GPU static best. Color pass ~16ms, ROI mask ~0.90ms, CPU total ~1.88ms (living animated). Pixel budget/compositor hypotheses require controlled sweep. Native Max unchanged; opt-in render-scale experiments only. [Evidence](../PERFORMANCE-P0-P1.md).

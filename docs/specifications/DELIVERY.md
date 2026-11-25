@@ -52,3 +52,5 @@ D-11: manter arquitetura GPU vivo aprovada parcialmente; não sacrificar qualida
 D-12: usuário reportou A/B animado ainda muito abaixo do estático; PR #12 CI verde não implica aprovação. Bloquear avanço de conteúdo até arquitetura e performance validadas; ADR-009 proposta, lab diagnóstico não é melhoria de FPS.
 
 D-13: user authorized P1; PR #13 CI passed but P0 physical JSON missing. Implement raw retained unified prototype behind URL flag first; no dependency migration yet; six-mode lab. No promotion before performance and visual evidence.
+
+D-14: P0 and P1 physical reports received; P1 CI green but performance gate failed. Keep default unchanged; next proposed P1.1 resolution/layer isolation and static caching, Three.js choice deferred. [Evidence](../PERFORMANCE-P0-P1.md).
