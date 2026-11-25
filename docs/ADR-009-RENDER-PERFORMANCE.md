@@ -29,3 +29,6 @@ Opt-in ten-phase resolution/foreground/optics lab, normal Max unchanged. See [P1
 
 ## P1.1 physical evidence
 Pixel-budget hypothesis supported by two consistent measurements; keep GPU Living, prioritize independent surface budgets and retained static batching, then optical optimization. No unified promotion or library migration yet. See [results](PERFORMANCE-P1.1.md).
+
+## P1.2 candidate
+GPU Living remains reference. Tight depth/order-preserving static cache and independent backing budgets, explicit experimental profiles; paired lab. [P1.2](P1.2-INTELLIGENT-RETAINED.md).

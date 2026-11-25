@@ -64,3 +64,6 @@ Open /?unified=1 for unified scene. Open /?lab=1 for six-mode comparison; origin
 
 ## P1.1 — Pixel Budget
 Open /?pixelLab=1, choose quick or extended, run and export JSON. Same viewport, original assets. Normal / remains 100% and /?lab=1 remains six-mode comparison. [Spec](docs/P1.1-PIXEL-BUDGET.md).
+
+## P1.2 — Intelligent Retained
+Open /?retained=1&profile=balanced (or native, detail, max). Compare cache ON/OFF at same resolution. /?retainedLab=1 exports eight-profile JSON. Normal / unchanged. [Spec](docs/P1.2-INTELLIGENT-RETAINED.md).

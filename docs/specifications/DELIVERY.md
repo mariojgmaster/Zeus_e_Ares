@@ -58,3 +58,5 @@ D-14: P0 and P1 physical reports received; P1 CI green but performance gate fail
 D-15: user approved P1.1. Diagnostic scale opt-in only; maintain original resources and production defaults; record exact measured settings, restore on cancel/finish. Await physical evidence before next rendering change.
 
 D-16: P1.1 CI success and physical diagnostics received; diagnostic validated, product performance/visual gates not passed. P1.2 proposed, no implementation or merge. [Results](../PERFORMANCE-P1.1.md).
+
+D-17: user approved P1.2. Candidate published separately, original Max default unchanged; P1.3 and release remain blocked pending evidence. [P1.2](../P1.2-INTELLIGENT-RETAINED.md).
