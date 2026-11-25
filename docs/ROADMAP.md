@@ -8,8 +8,9 @@ Aquário virtual afetivo e biologicamente inspirado, offline, interativo e proce
 |---|---|---|
 | 0.30 | Living Habitat | Cenário naturalista; composição responsiva; cenário clássico preservado |
 | 0.31 | Depth Engine | Oclusão ambiental por profundidade; integração com WebGL e software |
-| 0.32 | React & Docker | Migração arquitetural solicitada; preservar baseline |
-| 0.32.1 | Vegetation Occlusion Hotfix | Corrigir fragmentação dos peixes; máscara conservadora e lado de profundidade coerente |
+| 0.32 | React & Docker | Migração arquitetural homologada pelo usuário em 25/11/2026 |
+| 0.32.1 | Vegetation Occlusion Hotfix | Não homologada: rebarbas nas folhas e escala abrupta | 
+| 0.32.2 | Natural Occlusion & Smooth Depth | Refinamento da máscara, bordas alfa, profundidade gradual; candidata à homologação |
 | 0.33 | Living Vegetation | Camadas vegetais independentes, movimento orgânico e resposta aos peixes |
 | 0.34 | Water Physics | Superfície, correnteza, ondulações e partículas coerentes |
 | 0.35 | Natural Lighting | Sombras e ciclo de iluminação diária |

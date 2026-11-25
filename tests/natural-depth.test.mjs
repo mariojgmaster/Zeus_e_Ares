@@ -1,10 +1,9 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {buildLeafDepth,leafContact,leafSide,leafVisualZ} from '../src/engine/naturalDepth.js';
-const W=100,H=100,frame=new Uint8Array(W*H*4);
-function paint(x,y,r,g,b){frame.set([r,g,b,255],(y*W+x)*4);}
-paint(80,42,40,100,25);paint(81,42,9,37,40);paint(50,42,40,100,25);
-const map=buildLeafDepth(frame,W,H);
-test('only foreground green pixels in calibrated regions can occlude',()=>{assert.ok(map[4280]);assert.equal(map[4281],0);assert.equal(map[4250],0);});
-test('contact uses responsive photo rect and fin radius',()=>{assert.equal(leafContact(map,W,H,[-100,0,200,100],[{x:61,y:42.5,r:1}]),true);assert.equal(leafContact(map,W,H,[0,0,100,100],[{x:50,y:42,r:2}]),false);});
-test('whole fish stays on same side until it clears foliage',()=>{assert.equal(leafSide(.87,0,true),-1);assert.equal(leafSide(1.07,-1,true),-1);assert.equal(leafVisualZ(1.07,-1),.90);assert.equal(leafSide(1.07,-1,false),0);assert.equal(leafSide(1.07,0,true),1);assert.equal(leafVisualZ(.91,1),1.06);});
+import {buildLeafDepth,leafContact,refineCoverage,sampleCoverage,approachDepth,steerDepth,nextLeafSide,leafOcclusion} from '../src/engine/naturalDepth.js';
+test('close holes, remove isolated pixels and feather leaf borders',()=>{const w=40,h=40,seed=new Uint8Array(w*h);for(let y=10;y<30;y++)for(let x=10;x<30;x++)seed[y*w+x]=255;seed[20*w+20]=0;seed[4*w+4]=255;const m=refineCoverage(seed,w,h);assert.equal(m[20*w+20],255);assert.equal(m[4*w+4],0);assert.ok(m[20*w+9]>0&&m[20*w+9]<255);assert.equal(m[20*w+5],0);});
+test('bilinear coverage is continuous and outside photo is transparent',()=>{const m=new Uint8Array([0,255,0,255]);assert.equal(sampleCoverage(m,2,2,.5,.5),.5);assert.equal(sampleCoverage(m,2,2,-.1,.5),0);});
+test('photo region avoids green background and retains foreground leaf',()=>{const w=100,h=100,a=new Uint8Array(w*h*4);for(let y=41;y<=43;y++)for(let x=79;x<=81;x++)a.set([40,100,25,255],(y*w+x)*4);for(let y=41;y<=43;y++)for(let x=49;x<=51;x++)a.set([40,100,25,255],(y*w+x)*4);const m=buildLeafDepth(a,w,h);assert.ok(m[4280]>=64);assert.equal(m[4250],0);assert.equal(leafContact(m,w,h,[-100,0,200,100],[{x:61,y:42.5,r:1}]),true);});
+test('depth changes are rate-limited independently of frame rate',()=>{for(const hz of [30,60,120]){let z=.9;for(let i=0;i<hz;i++)z=approachDepth(z,100,1/hz);assert.ok(Math.abs(z-1.03)<1e-9);assert.ok(Math.abs(approachDepth(.9,100,1/hz)-.9)<=.13/hz+1e-9);}assert.equal(approachDepth(1.13,100,.1),1.13);});
+test('side is retained while near foliage and briefly after clearing',()=>{let n=nextLeafSide(.9,0,true,0,.016);assert.equal(n.side,-1);n=nextLeafSide(1.05,n.side,true,0,.016);assert.equal(n.side,-1);assert.equal(leafOcclusion(1.05,n.side),1);n=nextLeafSide(1.05,n.side,false,0,.2);assert.equal(n.side,-1);n=nextLeafSide(1.05,n.side,false,n.clear,.2);assert.equal(n.side,0);assert.equal(leafOcclusion(1.05,n.side),0);});
+test('steering is continuous and does not override outward motion',()=>{assert.equal(steerDepth(.98,1,50,600,0),50);assert.ok(steerDepth(.98,1,-50,600,.5)>-50);assert.ok(steerDepth(.98,1,50,600,.5)>=50);});
