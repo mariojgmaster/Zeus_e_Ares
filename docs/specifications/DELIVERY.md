@@ -48,3 +48,5 @@ D-09: usuário aprovou ADR-008 e etapa A. Manter padrão original, preservar com
 D-10: Parallax único; raízes no cascalho; fluidez 60 FPS. Outros cenários arquivados. Duas passagens GPU transitórias.
 
 D-11: manter arquitetura GPU vivo aprovada parcialmente; não sacrificar qualidade, implementar carregamento real, medir estabilidade até 60 FPS.
+
+D-12: usuário reportou A/B animado ainda muito abaixo do estático; PR #12 CI verde não implica aprovação. Bloquear avanço de conteúdo até arquitetura e performance validadas; ADR-009 proposta, lab diagnóstico não é melhoria de FPS.

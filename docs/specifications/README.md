@@ -16,3 +16,5 @@ Toda nova decisão deve ter ID, descrição, critérios verificáveis, estado e 
 - [0.33.7B](../MVP-0.33.7B.md) — GPU vivo, cenário único e raízes.
 
 - [0.33.7B.1](../MVP-0.33.7B.1.md) — frame pacing e carregamento.
+
+- [ADR-009](../ADR-009-RENDER-PERFORMANCE.md) — diagnóstico, alternativas de mercado e gate de lançamento.
