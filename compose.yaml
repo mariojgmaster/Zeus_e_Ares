@@ -1,0 +1,6 @@
+services:
+  aquarium:
+    build: .
+    ports:
+      - "${AQUA_PORT:-8080}:80"
+    restart: unless-stopped

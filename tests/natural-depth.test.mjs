@@ -1,0 +1,9 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {buildLeafDepth,leafContact,sampleCoverage,approachDepth,steerDepth,nextLeafSide,leafOcclusion} from '../src/engine/naturalDepth.js';
+test('bilinear coverage is continuous and outside photo is transparent',()=>{const m=new Uint8Array([0,255,0,255]);assert.equal(sampleCoverage(m,2,2,.5,.5),.5);assert.equal(sampleCoverage(m,2,2,-.1,.5),0);});
+test('depth changes are rate-limited independently of frame rate',()=>{for(const hz of [30,60,120]){let z=.9;for(let i=0;i<hz;i++)z=approachDepth(z,100,1/hz);assert.ok(Math.abs(z-1.03)<1e-9);assert.ok(Math.abs(approachDepth(.9,100,1/hz)-.9)<=.13/hz+1e-9);}assert.equal(approachDepth(1.13,100,.1),1.13);});
+test('side is retained while near foliage and briefly after clearing',()=>{let n=nextLeafSide(.9,0,true,0,.016);assert.equal(n.side,-1);n=nextLeafSide(1.05,n.side,true,0,.016);assert.equal(n.side,-1);assert.equal(leafOcclusion(1.05,n.side),1);n=nextLeafSide(1.05,n.side,false,0,.2);assert.equal(n.side,-1);n=nextLeafSide(1.05,n.side,false,n.clear,.2);assert.equal(n.side,0);assert.equal(leafOcclusion(1.05,n.side),0);});
+test('steering is continuous and does not override outward motion',()=>{assert.equal(steerDepth(.98,1,50,600,0),50);assert.ok(steerDepth(.98,1,-50,600,.5)>-50);assert.ok(steerDepth(.98,1,50,600,.5)>=50);});
+test('alpha matte is independent of leaf pigmentation and preserves antialiased edges',()=>{const pixels=new Uint8Array([0,0,0,255,255,255,255,0,20,200,10,128]);assert.deepEqual([...buildLeafDepth(pixels,3,1)],[255,0,128]);assert.throws(()=>buildLeafDepth(pixels,4,1),RangeError);});
+test('body/fin contact uses cropped photo coordinates and coverage threshold',()=>{const m=new Uint8Array(100);m[44]=255;assert.equal(leafContact(m,10,10,[-50,0,100,100],[{x:-5,y:45,r:1}]),true);assert.equal(leafContact(m,10,10,[-50,0,100,100],[{x:30,y:45,r:1}]),false);});

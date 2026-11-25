@@ -1,0 +1,12 @@
+services:
+  aquarium-dev:
+    image: node:22-alpine
+    working_dir: /app
+    command: sh -c "if [ -f package-lock.json ]; then npm ci; else npm install; fi && npm run dev"
+    ports:
+      - "127.0.0.1:${AQUA_DEV_PORT:-5173}:5173"
+    volumes:
+      - .:/app
+      - aqua_node_modules:/app/node_modules
+volumes:
+  aqua_node_modules:
