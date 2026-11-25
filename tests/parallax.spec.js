@@ -16,3 +16,13 @@ test('built assets preserve exact four-plane coverage and independent optics',as
  const result=await page.evaluate(async()=>{const m=await (await fetch('/parallax/scene.json')).json();const ids=[...new Set(m.layers.map(l=>l.asset)),'water','surface'];const loaded=await Promise.all(ids.map(id=>new Promise((res,rej)=>{const im=new Image();im.onload=()=>res([im.naturalWidth,im.naturalHeight]);im.onerror=rej;im.src='/parallax/'+id+'.webp';})));return {instances:m.layers.length,planes:[...new Set(m.layers.map(l=>l.z))].length,loaded:loaded.length,enabled:m.waterOptics.enabled};});
  expect(result).toEqual({instances:24,planes:5,loaded:12,enabled:true});
 });
+
+test('vegetation A/B and flow controls are independent and respect reduced motion',async({page})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/');
+ const v=page.locator('#vegetation'),flow=page.locator('#flow');
+ await expect(page.locator('#habitatMode')).toHaveText('Cenário: Parallax',{timeout:30000});
+ await expect(v).toHaveAttribute('aria-pressed','false');await v.click();await expect(v).toHaveAttribute('aria-pressed','true');
+ await flow.click();await expect(flow).toHaveAttribute('aria-pressed','false');await expect(v).toHaveAttribute('aria-pressed','true');
+ await v.click();await expect(v).toHaveAttribute('aria-pressed','false');expect(errors).toEqual([]);
+});
