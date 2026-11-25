@@ -1,6 +1,6 @@
 # AQUA ETERNA — Zeus & Ares
 
-MVP 0.32 — React + Docker (homologada em 25/11/2026). MVP 0.33.2 — Underwater Optics (homologada pelo usuário em 25/11/2026 (8/8 critérios)). MVP 0.33.3 — Living Vegetation (candidata à homologação). Baseline 0.31 homologada pelo usuário e integrada à master; PRs #1, #2, #3. A versão 0.32 preserva o motor procedural, texturas, cenários, shaders e geometria; React monta a interface e o adaptador administra o ciclo de vida do motor.
+MVP 0.32 — React + Docker (homologada em 25/11/2026). MVP 0.33.2 — Underwater Optics (homologada pelo usuário em 25/11/2026 (8/8 critérios)). MVP 0.33.3 — Living Vegetation (movimento aprovado; regressão de desempenho reportada). MVP 0.33.4 — Performance Recovery (candidata à homologação). Baseline 0.31 homologada pelo usuário e integrada à master; PRs #1, #2, #3. A versão 0.32 preserva o motor procedural, texturas, cenários, shaders e geometria; React monta a interface e o adaptador administra o ciclo de vida do motor.
 
 ## Executar com Docker
 ```sh
@@ -40,3 +40,6 @@ Build npm, Docker e smoke tests precisam ser executados em ambiente com dependê
 
 ## Living Vegetation
 Deformação procedural de plantas por faixas horizontais ancoradas, corrente suave, resposta amortecida à velocidade e profundidade dos peixes, mapa alfa derivado do mesmo raster. WebGL e Canvas 3D atualizam em passos de 75 ms; Canvas Worker publica o ambiente junto ao bitmap compatível, em passos de pelo menos 120 ms. Controle Vegetação restaura a referência estática e respeita prefers-reduced-motion no início. A geometria segue 2.5D; não equivale a folhas 3D independentes. Validação visual, custo de rasterização e CI ainda precisam ser conferidos.
+
+## Performance Recovery
+Planos visuais continuam nativos; mapas de oclusão animados passam a 836 × 471, aproximadamente 75% menos bytes/pixels lidos. O mapa estático conserva resolução nativa. Faixas de deformação passam de 8 para 24 px, preservando a função de movimento. Objetos estáticos agrupados e cacheados; taxa de atualização adaptativa limitada a 75–160 ms (Worker: mínimo 120 ms). Controle FPS exibe custo da vegetação, máscara e tamanho do mapa. Confirmar visualmente contornos e fluidez e comparar FPS no mesmo dispositivo; não confundir redução de trabalho com ganho medido de FPS.

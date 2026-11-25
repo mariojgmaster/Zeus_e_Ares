@@ -26,3 +26,5 @@ test('vegetation A/B and flow controls are independent and respect reduced motio
  await flow.click();await expect(flow).toHaveAttribute('aria-pressed','false');await expect(v).toHaveAttribute('aria-pressed','true');
  await v.click();await expect(v).toHaveAttribute('aria-pressed','false');expect(errors).toEqual([]);
 });
+
+test('performance diagnostics report mask size with vegetation enabled and disabled',async({page})=>{await page.goto('/');await expect(page.locator('#habitatMode')).toHaveText('Cenário: Parallax',{timeout:30000});const v=page.locator('#vegetation'),fps=page.locator('#perf');await fps.click();if(await v.getAttribute('aria-pressed')==='false')await v.click();await expect(fps).toHaveAttribute('title',/Mapa 1\.50 MiB/,{timeout:45000});await v.click();await expect(fps).toHaveAttribute('title',/Mapa 6\.00 MiB/,{timeout:45000});});

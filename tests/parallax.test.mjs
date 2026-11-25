@@ -8,3 +8,5 @@ test('depth guard does not teleport and allows free water crossings',()=>{assert
 test('collision uses exact same plane alpha and responsive crop',()=>{assert.equal(contactPlane(solid,1,1,{x:0,y:0,dw:100,dh:100},[{x:50,y:50,r:4}],0),true);assert.equal(contactPlane(solid,1,1,{x:0,y:0,dw:100,dh:100},[{x:50,y:50,r:4}],1),false);});
 
 test('optics respect night and zero strength without modifying the geometry',()=>{assert.equal(opticalStrength(0,0),0);assert.equal(opticalStrength(1,0),1);assert.ok(Math.abs(opticalStrength(1,1)-.11)<1e-9);assert.equal(opticalStrength(-2,0),0);});
+
+test('depth guard skips mask sampling unless crossing a plane',()=>{let calls=0;assert.equal(guardDepthStep(.84,.85,()=>{calls++;return true;}),.85);assert.equal(calls,0);guardDepthStep(.829,.832,()=>{calls++;return true;});assert.equal(calls,1);});
