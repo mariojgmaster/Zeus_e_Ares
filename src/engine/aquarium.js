@@ -534,8 +534,8 @@ if(new URLSearchParams(location.search).has('unified')||new URLSearchParams(loca
 }
 if(new URLSearchParams(location.search).get('lab')==='1'||pixelLab){
  const controls=root.querySelector('.controls');
- const surface=(c,visible=true)=>({width:c.width,height:c.height,visible});
- const surfaces=()=>({tank:surface(canvas),foreground:surface(fgCanvas),fish:surface(scene3d,scene3d.style.display!=='none'),habitat:surface(backdrop,backdrop.style.display!=='none')});
+ const surface=(c,visible=true,context=null)=>({width:c.width,height:c.height,visible,...(context&&visible?{drawingBufferWidth:context.drawingBufferWidth,drawingBufferHeight:context.drawingBufferHeight}:{})});
+ const surfaces=()=>({tank:surface(canvas),foreground:surface(fgCanvas),fish:surface(scene3d,scene3d.style.display!=='none',gl),habitat:surface(backdrop,backdrop.style.display!=='none',bgGL)});
  const info=()=>({valid:firstFrame&&renderMode==='WebGL'&&focus<0&&photoPanel.hidden&&!document.hidden&&!livingFailed&&!gpuStaticFailed&&!unifiedFailed,width:W,height:H,dpr:baseDpr,deviceDpr:devicePixelRatio||1,renderDpr:dpr,foregroundDpr,renderMode,quality:renderQuality,night,depthEnabled,opticsOn,flowOn,vegetationOn,adaptiveQuality,surfaces:surfaces()});
  const syncOptics=()=>opticsBtn.setAttribute('aria-pressed',String(opticsOn));
  lab=createPerformanceLab(root,{info,snapshot:()=>({info:{...info(),renderer:gl?.getParameter(gl.RENDERER)??null,gpu:gl?.getExtension('WEBGL_debug_renderer_info')?gl.getParameter(gl.getExtension('WEBGL_debug_renderer_info').UNMASKED_RENDERER_WEBGL):null,benchmarkQuality:1},unifiedRequested,gpuLivingRequested,gpuStaticRequested,vegetationOn,adaptiveQuality,renderQuality,night,depthEnabled,opticsOn,flowOn,cameraTarget:[...cameraTarget],parallaxShift:[...parallaxShift],pixelScale,foregroundScale,controlsInert:controls.inert,canvasPointer:canvas.style.pointerEvents}),

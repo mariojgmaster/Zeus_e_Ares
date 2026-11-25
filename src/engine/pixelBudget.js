@@ -23,6 +23,6 @@ export const pixelScenarios=Object.freeze([
 export function expectedMode(mode){return mode.startsWith('unified')?'unified':mode.startsWith('living')?'living':mode==='gpu-static'?'gpu-static':'original';}
 export function matchesBuffers(surfaces,scenario,width,height,baseDpr){
  const full=pixelBudget(width,height,baseDpr,scenario.scale),front=pixelBudget(width,height,baseDpr,scenario.foreground);
- const same=(s,b)=>s&&s.width===b.width&&s.height===b.height&&s.visible;
+ const same=(s,b)=>s&&s.width===b.width&&s.height===b.height&&s.visible&&(s.drawingBufferWidth===undefined||s.drawingBufferWidth===b.width)&&(s.drawingBufferHeight===undefined||s.drawingBufferHeight===b.height);
  return same(surfaces.tank,full)&&same(surfaces.fish,full)&&same(surfaces.foreground,front)&&(scenario.mode.startsWith('living')?same(surfaces.habitat,full):!surfaces.habitat.visible);
 }
