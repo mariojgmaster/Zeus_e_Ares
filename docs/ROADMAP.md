@@ -16,7 +16,10 @@ Aquário virtual afetivo e biologicamente inspirado, offline, interativo e proce
 | 0.33.1 | Natural Color | Graduação de cores naturais, aprovada visualmente na prévia |
 | 0.33.2 | Underwater Optics | Integração dos recursos e óptica subaquática; homologada pelo usuário em 25/11/2026 (8/8) |
 | 0.33.3 | Living Vegetation | Movimento orgânico aprovado; regressão de performance reportada |
-| 0.33.4 | Performance Recovery | Recuperação de FPS sem sacrificar modelos nem movimentos |
+| 0.33.4 | Performance Recovery | CI passou; reprovada pelo usuário por travamentos persistentes |
+| 0.33.5 | Fluid Engine | Reprovada: FPS aproximadamente dobrou, cenário quebrou |
+| 0.33.6 | Visual Rollback | Runtime idêntico à 0.33.4; docs preservadas; não homologada |
+| 0.33.7 | GPU-native Habitat | Proposta incremental; [ADR-008](ADR-008-GPU-NATIVE-HABITAT.md) |
 | 0.34 | Living Driftwood | Portais por tamanho, cavidade navegável e esconderijo |
 | 0.34.1 | Water Physics | Superfície, correnteza, ondulações e partículas coerentes |
 | 0.35 | Natural Lighting | Sombras e ciclo de iluminação diária |
@@ -51,3 +54,6 @@ Mapa de profundidade estático em espaço da fotografia, 512 x 288 (147.456 byte
 6. Controle Vegetação permite comparação exata com a 0.33.2; respeita redução de movimento inicial.
 7. WebGL, Canvas Worker e Canvas 3D mantêm consistência visual e FPS aceitável; verificar desktop e mobile.
 8. Alimentação, respiração, personalidade, observação, cenário e controles sem regressões.
+
+## Especificações permanentes
+Ver [índice de especificações](specifications/README.md). Nenhuma entrega futura deve omitir atualização de requisitos, decisões, pendências e evidências de homologação. Living Driftwood depende da recuperação de fluidez, não especificamente da versão 0.33.4.
