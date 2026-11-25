@@ -60,3 +60,5 @@ D-15: user approved P1.1. Diagnostic scale opt-in only; maintain original resour
 D-16: P1.1 CI success and physical diagnostics received; diagnostic validated, product performance/visual gates not passed. P1.2 proposed, no implementation or merge. [Results](../PERFORMANCE-P1.1.md).
 
 D-17: user approved P1.2. Candidate published separately, original Max default unchanged; P1.3 and release remain blocked pending evidence. [P1.2](../P1.2-INTELLIGENT-RETAINED.md).
+
+D-18: P1.2 CI passed, quick hardware report received and analyzed; best 45.81 FPS, zero >50ms in short sample. Performance gate remains open and visual approval absent. P1.3 proposed, no implementation or merge. [Results](../PERFORMANCE-P1.2.md).

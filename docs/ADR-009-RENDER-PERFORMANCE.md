@@ -32,3 +32,6 @@ Pixel-budget hypothesis supported by two consistent measurements; keep GPU Livin
 
 ## P1.2 candidate
 GPU Living remains reference. Tight depth/order-preserving static cache and independent backing budgets, explicit experimental profiles; paired lab. [P1.2](P1.2-INTELLIGENT-RETAINED.md).
+
+## P1.2 physical evidence
+Independent surface budgets are the strongest measured improvement; cache-only deltas small, keep optional. P1.3 prioritizes optical passes and compositor isolation at identical buffers. [Results](PERFORMANCE-P1.2.md).

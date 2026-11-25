@@ -28,3 +28,5 @@ Toda nova decisão deve ter ID, descrição, critérios verificáveis, estado e 
 - [P1.1 physical results](../PERFORMANCE-P1.1.md) — two reports and proposed P1.2.
 
 - [P1.2 Intelligent Retained Rendering](../P1.2-INTELLIGENT-RETAINED.md) — static cache and independent budgets.
+
+- [P1.2 physical results](../PERFORMANCE-P1.2.md) — paired cache and independent budgets, optical strategy.

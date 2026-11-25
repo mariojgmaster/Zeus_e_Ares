@@ -24,3 +24,5 @@ ENG-14: P1.1 experimental backing-store scale separated from CSS/physics/texture
 ENG-15: native-area living 37.60 FPS versus 12.79 full, optical-off 18.39 and foreground-half 17.40 at full. P1.2 proposed independent backing budgets and depth-preserving retained static runs; original Max unchanged, visual parity and 60 FPS gates pending. [Results](../PERFORMANCE-P1.1.md).
 
 ENG-16: P1.2 opt-in retained static runs; no crossing plants/depth, bounded union overdraw, persistent textures; independent fish/habitat/tank/foreground backing with original mask and geometry. Paired benchmark and visual approval required. [P1.2](../P1.2-INTELLIGENT-RETAINED.md).
+
+ENG-17: P1.2 balanced 45.81 FPS, native-soft 45.58; retained native 38.14. Cache-only gains small, color GPU time essentially unchanged at native; foreground half-native area is leading opportunity. P1.3 optics proposal; no lower fish/scene budgets without approval. [Results](../PERFORMANCE-P1.2.md).
