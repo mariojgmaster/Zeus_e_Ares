@@ -1,0 +1,4 @@
+# MVP 0.32 — React & Docker
+Baseline aprovada: dc01536d9a1e85ea2fed8547407a8d1602c2d946. PRs #1–#3 integrados.
+Decisões: Vite, React, Nginx multi-stage, porta 8080, sem servidor de aplicação. Migração incremental: shell React e motor isolado em função de montagem; separação dos recursos binários; preservação do worker e das funções biológicas. A decomposição interna dos algoritmos e a conversão de controles imperativos a estados React ficam para um refactor posterior e não devem alterar a experiência.
+Validação: parse sintático do motor por JavaScript; testes de integridade e smoke incluídos, ainda não executados no ambiente alvo. Build, Docker, GPU física, microfone e equivalência visual pendentes.

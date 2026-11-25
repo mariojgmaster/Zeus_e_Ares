@@ -1,16 +1,37 @@
 # AQUA ETERNA — Zeus & Ares
 
-Aquário virtual afetivo, procedural, em HTML único, com modelos de Zeus e Ares. Abra `index.html` em um navegador moderno. Não requer servidor, IA generativa ou serviços externos. O microfone depende do contexto seguro e da permissão do navegador.
+MVP 0.32 — React + Docker (candidato à homologação). Baseline 0.31 homologada pelo usuário e integrada à master; PRs #1, #2, #3. A versão 0.32 preserva o motor procedural, texturas, cenários, shaders e geometria; React monta a interface e o adaptador administra o ciclo de vida do motor.
 
-## Baseline
+## Executar com Docker
+```sh
+docker compose up --build -d
+```
+Abra http://localhost:8080. Defina AQUA_PORT se precisar de outra porta. Para parar: `docker compose down`.
 
-MVP 0.28: comportamento diversificado, respiração obrigatória, bolhas, alimentação e colisões aproximadas; renderizador WebGL ou Canvas Worker com fallback. Referência visual homologada: 0.23, recuperada na 0.25.2.
+## Desenvolvimento
+Node 22.12+:
+```sh
+npm install
+npm run dev
+```
+Ou `docker compose -f compose.dev.yaml up` (localhost:5173).
+```sh
+npm test
+npm run build
+npx playwright install chromium
+npm run test:smoke
+```
+O lockfile precisa ser gerado por npm e versionado antes de tratar o build como reprodutível.
 
-## Fluxo de evolução
+## Arquitetura
+- src/components: shell React (interface estável).
+- src/engine: motor imperativo WebGL/Canvas Worker/Canvas 3D, ciclo de vida e carregamento dos atlas.
+- src/assets: arquivos fotográficos e texturas originais binárias.
+- src/styles: CSS preservado.
+- Dockerfile: build Node + runtime Nginx; healthcheck /healthz.
+- docs/ROADMAP.md: roadmap de evolução.
 
-- `master`: base preservada; evoluções em branches de feature e PRs.
-- Não alterar texturas, geometria, shaders ou resolução sem revisão específica.
-- Testar alimentação, respiração, colisões, estabilidade e aparência antes de promover.
-- As personalidades são simulações, não reconstruções comprovadas dos animais.
+O motor continua imperativo para evitar regressões de performance e de animação. Não habilitar minificação sem validar a serialização de funções do Canvas Worker. Microfone necessita HTTPS ou localhost; não há backend nem transmissão de áudio a terceiros. As fotos de referência estão em repositório público. Personalidades são simulações, não reconstruções comprovadas. A versão 0.31 pode ser recuperada no commit dc01536d9a1e85ea2fed8547407a8d1602c2d946.
 
-Atenção: o HTML incorpora imagens de referência; este repositório é público.
+## Validação pendente
+Build npm, Docker e smoke tests precisam ser executados em ambiente com dependências e Docker. Homologação visual e teste em GPU física/microfone permanecem necessários. Não promover a 0.32 antes da homologação.
