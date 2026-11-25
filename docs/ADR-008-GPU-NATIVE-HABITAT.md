@@ -22,3 +22,6 @@ Living Driftwood remains blocked until both pass. Static authored cavity/portals
 
 ## Stage A implementation boundary
 [0.33.7A](MVP-0.33.7A.md) uses pregraded native static planes, shared GL context and one-time GPU alpha target. A cached Canvas bridge preserves optical/food/night layer order. Individual textured plant meshes and bridge removal are deferred to later validated stages; no claims of performance gain or complete GPU-native architecture.
+
+## 0.33.7B amendment
+Two GPU contexts with shared pose and shader avoid copying entire animated frames while preserving existing DOM effects/fish layering. Single context remains target; all plants enabled in candidate for performance validation. Static A/B retained. User requested only Parallax and grounded roots.

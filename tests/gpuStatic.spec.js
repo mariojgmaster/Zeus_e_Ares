@@ -14,7 +14,7 @@ test('GPU static synthetic color, alpha and orientation parity',async({page})=>{
 for(const viewport of [{width:1280,height:720},{width:390,height:844}]){
  test('real static scene parity and A/B '+viewport.width,async({page})=>{
   await page.setViewportSize(viewport);const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/?gpuParity=1');const b=page.locator('#gpuStatic'),v=page.locator('#vegetation');
-  await expect(b).toBeEnabled({timeout:30000});await expect(b).toHaveAttribute('aria-pressed','false');await b.click();await expect(b).toHaveAttribute('data-parity',/color/,{timeout:30000});const p=JSON.parse(await b.getAttribute('data-parity'));expect(p.mask.max).toBeLessThanOrEqual(1);expect(p.color.mean).toBeLessThan(2.5);expect(p.color.fraction).toBeLessThan(.035);
+  await expect(b).toBeEnabled({timeout:30000});const live=page.locator('#gpuLiving');if(await live.getAttribute('aria-pressed')==='true')await live.click();await expect(b).toHaveAttribute('aria-pressed','false');await b.click();await expect(b).toHaveAttribute('data-parity',/color/,{timeout:30000});const p=JSON.parse(await b.getAttribute('data-parity'));expect(p.mask.max).toBeLessThanOrEqual(1);expect(p.color.mean).toBeLessThan(2.5);expect(p.color.fraction).toBeLessThan(.035);
   await expect(v).toBeDisabled();await expect(v).toHaveAttribute('aria-pressed','false');await page.mouse.move(20,30);await page.locator('#night').click();await page.locator('#inspect').click();await expect(page.locator('#rotate')).toBeVisible();await page.locator('#inspect').click();await page.locator('#inspect').click();await b.click();await expect(v).toBeEnabled();await expect(b).toHaveAttribute('aria-pressed','false');expect(errors).toEqual([]);
  });
 }

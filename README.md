@@ -49,3 +49,6 @@ A fonte de verdade é [docs/specifications/README.md](docs/specifications/README
 
 ## 0.33.7A — GPU Static Scene (experimental)
 Use GPU: Original/Estático to compare the retained static GPU planes and original renderer. GPU is off by default. Compare with Vegetação off on original; exiting restores prior vegetation preference. [Specification](docs/MVP-0.33.7A.md). No new assets or fish changes.
+
+## 0.33.7B
+Parallax único; GPU: Vivo padrão quando suportado. Original e Estático são modos de renderização, não cenários. [Especificação](docs/MVP-0.33.7B.md).
