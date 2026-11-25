@@ -23,3 +23,9 @@ Raw WebGL1-compatible prototype first, preserving original shader/mesh data for 
 
 ## Physical evidence amendment
 P0/P1 reports received. P1 failed FPS gate; resolution/pixel budget and compositor isolation take precedence over library migration or further mask work. See [PERFORMANCE-P0-P1](PERFORMANCE-P0-P1.md). P1.1 proposed, not implemented.
+
+## P1.1 implementation
+Opt-in ten-phase resolution/foreground/optics lab, normal Max unchanged. See [P1.1](P1.1-PIXEL-BUDGET.md). P1 performance gate remains failed; library decision deferred.
+
+## P1.1 physical evidence
+Pixel-budget hypothesis supported by two consistent measurements; keep GPU Living, prioritize independent surface budgets and retained static batching, then optical optimization. No unified promotion or library migration yet. See [results](PERFORMANCE-P1.1.md).
