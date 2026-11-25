@@ -20,3 +20,5 @@ ENG-12 (P1 experimental): one active WebGL context for color and fish; depth-ord
 ENG-13: hardware benchmark P0/P1 at ~8.16MP, UHD 630: 13.35 FPS living animated, 12.20 unified animated, 16.93 GPU static best. Color pass ~16ms, ROI mask ~0.90ms, CPU total ~1.88ms (living animated). Pixel budget/compositor hypotheses require controlled sweep. Native Max unchanged; opt-in render-scale experiments only. [Evidence](../PERFORMANCE-P0-P1.md).
 
 ENG-14: P1.1 experimental backing-store scale separated from CSS/physics/texture resolution; native area cap and foreground-only isolation; no silent Max downgrade. JSON schema 2 reports measured dimensions, controls, RAF/CPU/GPU. [P1.1](../P1.1-PIXEL-BUDGET.md).
+
+ENG-15: native-area living 37.60 FPS versus 12.79 full, optical-off 18.39 and foreground-half 17.40 at full. P1.2 proposed independent backing budgets and depth-preserving retained static runs; original Max unchanged, visual parity and 60 FPS gates pending. [Results](../PERFORMANCE-P1.1.md).

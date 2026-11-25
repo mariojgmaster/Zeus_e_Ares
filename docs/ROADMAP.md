@@ -70,3 +70,5 @@ P1 candidate: opt-in unified raw renderer, P0 physical benchmark still open. P2 
 P0 physical reports received; P1 performance failed (12.20 FPS unified animated). P1.1 proposed: resolution sweep and compositor isolation, then static batching and GPU effects as evidence warrants. [Benchmark](PERFORMANCE-P0-P1.md). No P2/Driftwood promotion.
 
 P1.1 candidate: ten-phase Pixel Budget & Resolution Lab. P1.2 static batching and P1.3 optical optimization pending benchmark evidence; P2/P3 and Driftwood remain blocked.
+
+P1.1 diagnostic validated (37.60 FPS native twice); P1.2 proposed retained GPU Living + independent pixel budgets; P1.3 optics; 60 FPS and visual gate still open. [Results](PERFORMANCE-P1.1.md).
