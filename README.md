@@ -46,3 +46,6 @@ Planos visuais continuam nativos; mapas de oclusão animados passam a 836 × 471
 
 ## Especificações do projeto
 A fonte de verdade é [docs/specifications/README.md](docs/specifications/README.md). Toda alteração de comportamento, visual, arquitetura, performance, requisito pendente ou homologação deve atualizar a documentação no mesmo PR. A estratégia Worker/OffscreenCanvas da 0.33.5 foi revertida neste branch. Próxima arquitetura proposta: [GPU-native Habitat](docs/ADR-008-GPU-NATIVE-HABITAT.md). FPS real exige medição no dispositivo-alvo.
+
+## 0.33.7A — GPU Static Scene (experimental)
+Use GPU: Original/Estático to compare the retained static GPU planes and original renderer. GPU is off by default. Compare with Vegetação off on original; exiting restores prior vegetation preference. [Specification](docs/MVP-0.33.7A.md). No new assets or fish changes.

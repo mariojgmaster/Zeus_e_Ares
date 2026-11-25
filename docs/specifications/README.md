@@ -10,3 +10,5 @@ Fonte de verdade funcional e técnica. Revisão: 25/11/2026. Este índice é obr
 Toda nova decisão deve ter ID, descrição, critérios verificáveis, estado e evidência/referência. Atualizar os documentos no mesmo PR que o código. Preservar histórico; não transformar propostas em requisitos homologados. O feedback do usuário prevalece sobre CI verde. Requisitos recuperados de versões antigas são registrados na medida da evidência disponível; detalhes não recuperados não devem ser inventados.
 
 - [ADR-008 — GPU-native Living Habitat](../ADR-008-GPU-NATIVE-HABITAT.md): rollback 0.33.5, nova arquitetura proposta e gates incrementais.
+
+- [MVP 0.33.7A](../MVP-0.33.7A.md): render estático GPU, ponte transitória, testes e limites.

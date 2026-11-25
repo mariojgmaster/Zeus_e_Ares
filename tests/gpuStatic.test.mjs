@@ -1,0 +1,3 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {planeRect,comparePixels,DEPTH_PLANES} from '../src/engine/gpuStaticScene.js';
+test('camera factor and crop preserve reference coordinates',()=>{const r={x:-100,y:-10,dw:1600,dh:900};assert.deepEqual(planeRect(r,.7,[.01,.02]),[-100,-10,1600,900]);assert.deepEqual(planeRect(r,1.065,[.01,.02]).map(Math.round),[-84,8,1600,900]);assert.deepEqual(DEPTH_PLANES,[.83,.90,.97,1.065]);});
+test('pixel parity metric measures channel differences',()=>{assert.deepEqual(comparePixels([0,255,50,255],[0,255,70,255]),{mean:5,max:20,fraction:.25});assert.throws(()=>comparePixels([],[]));});
