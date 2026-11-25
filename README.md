@@ -1,6 +1,6 @@
 # AQUA ETERNA — Zeus & Ares
 
-MVP 0.32 — React + Docker (homologada em 25/11/2026). MVP 0.33.2 — Underwater Optics (homologada pelo usuário em 25/11/2026 (8/8 critérios)). MVP 0.33.3 — Living Vegetation (movimento aprovado; regressão de desempenho reportada). MVP 0.33.4 — Performance Recovery (candidata à homologação). Baseline 0.31 homologada pelo usuário e integrada à master; PRs #1, #2, #3. A versão 0.32 preserva o motor procedural, texturas, cenários, shaders e geometria; React monta a interface e o adaptador administra o ciclo de vida do motor.
+MVP 0.32 — React + Docker (homologada em 25/11/2026). MVP 0.33.2 — Underwater Optics (homologada pelo usuário em 25/11/2026 (8/8 critérios)). MVP 0.33.3 — Living Vegetation (movimento aprovado; regressão de desempenho reportada). MVP 0.33.4 — Performance Recovery (reprovada por travamentos). MVP 0.33.5 — Fluid Engine (candidata). Baseline 0.31 homologada pelo usuário e integrada à master; PRs #1, #2, #3. A versão 0.32 preserva o motor procedural, texturas, cenários, shaders e geometria; React monta a interface e o adaptador administra o ciclo de vida do motor.
 
 ## Executar com Docker
 ```sh
@@ -43,3 +43,6 @@ Deformação procedural de plantas por faixas horizontais ancoradas, corrente su
 
 ## Performance Recovery
 Planos visuais continuam nativos; mapas de oclusão animados passam a 836 × 471, aproximadamente 75% menos bytes/pixels lidos. O mapa estático conserva resolução nativa. Faixas de deformação passam de 8 para 24 px, preservando a função de movimento. Objetos estáticos agrupados e cacheados; taxa de atualização adaptativa limitada a 75–160 ms (Worker: mínimo 120 ms). Controle FPS exibe custo da vegetação, máscara e tamanho do mapa. Confirmar visualmente contornos e fluidez e comparar FPS no mesmo dispositivo; não confundir redução de trabalho com ganho medido de FPS.
+
+## Especificações do projeto
+A fonte de verdade é [docs/specifications/README.md](docs/specifications/README.md). Toda alteração de comportamento, visual, arquitetura, performance, requisito pendente ou homologação deve atualizar a documentação no mesmo PR. A 0.33.5 move a recomposição da vegetação para Worker/OffscreenCanvas, mantém máscaras e frames sincronizados e evita rasterização síncrona enquanto o worker de peixes está inicializando. FPS real exige medição no dispositivo-alvo.
