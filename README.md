@@ -52,3 +52,6 @@ Use GPU: Original/Estático to compare the retained static GPU planes and origin
 
 ## 0.33.7B
 Parallax único; GPU: Vivo padrão quando suportado. Original e Estático são modos de renderização, não cenários. [Especificação](docs/MVP-0.33.7B.md).
+
+## 0.33.7B.1
+Tela de carregamento real e otimização de cobertura GPU. [Especificação](docs/MVP-0.33.7B.1.md).

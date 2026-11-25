@@ -10,3 +10,5 @@ ENG-07 (proposta): GPU-first retained scene; WebGL compartilhado, textura estát
 
 ENG-08 (0.33.7A candidata): cinco planos pré-graduados residentes no mesmo contexto WebGL dos peixes; máscara RGBA por FBO estático, alfa premultiplicado, recorte e câmera equivalentes; A/B off por padrão. Ponte transitória de composição 2D cacheada preserva ordem dos efeitos; não é GPU-native integral. Ver [especificação](../MVP-0.33.7A.md).
 ENG-09: GPU vivo padrão quando suportado; duas passagens GPU e pose compartilhada, sem cópia animada de cenário. Meta 60 FPS, 13 FPS reportados em 0.33.7A Original. Ver MVP-0.33.7B.
+
+ENG-10: oclusão GPU por regiões conservadoras pós-simulação, sem reduzir resolução; máscara estática integral, fallback CPU lazy. Carregar ambiente e atlas em paralelo, aguardar primeiro quadro real. Meta 60 FPS ainda não comprovada; 0.33.7B máximo 17 FPS reportado.

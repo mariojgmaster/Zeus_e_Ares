@@ -24,6 +24,7 @@ Estados: H = homologado pelo usuário; P = parcial; R = reprovado; C = candidato
 | 0.33.6 | Visual Rollback | E, runtime 0.33.4 restaurado, docs mantidas, desempenho pendente |
 | 0.33.7A | GPU Static Scene | P, melhora parcial, 13 FPS Original |
 | 0.33.7B | GPU vivo, cenário único e raízes | C |
+| 0.33.7B.1 | Frame Pacing & Loading | C, 0.33.7B melhorou mas 17 FPS máx e engasgos |
 | 0.33.7C–D | Física e validação | F |
 | 0.34 | Living Driftwood | F, bloqueada pela fluidez |
 | 0.34.1 | Water Physics | F |
@@ -45,3 +46,5 @@ D-08: reverter runtime da 0.33.5; não aceitar ganho de FPS com quebra visual; e
 
 D-09: usuário aprovou ADR-008 e etapa A. Manter padrão original, preservar composição e realizar paridade antes de deformação.
 D-10: Parallax único; raízes no cascalho; fluidez 60 FPS. Outros cenários arquivados. Duas passagens GPU transitórias.
+
+D-11: manter arquitetura GPU vivo aprovada parcialmente; não sacrificar qualidade, implementar carregamento real, medir estabilidade até 60 FPS.

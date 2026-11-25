@@ -14,3 +14,5 @@ Toda nova decisão deve ter ID, descrição, critérios verificáveis, estado e 
 - [MVP 0.33.7A](../MVP-0.33.7A.md): render estático GPU, ponte transitória, testes e limites.
 
 - [0.33.7B](../MVP-0.33.7B.md) — GPU vivo, cenário único e raízes.
+
+- [0.33.7B.1](../MVP-0.33.7B.1.md) — frame pacing e carregamento.
