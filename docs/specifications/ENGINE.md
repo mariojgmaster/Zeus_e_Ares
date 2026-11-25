@@ -14,3 +14,5 @@ ENG-09: GPU vivo padrão quando suportado; duas passagens GPU e pose compartilha
 ENG-10: oclusão GPU por regiões conservadoras pós-simulação, sem reduzir resolução; máscara estática integral, fallback CPU lazy. Carregar ambiente e atlas em paralelo, aguardar primeiro quadro real. Meta 60 FPS ainda não comprovada; 0.33.7B máximo 17 FPS reportado.
 
 ENG-11 (proposta): performance é gate de lançamento; avaliar renderizador único WebGL2 com Three.js e alternativa raw WebGL2; PixiJS candidato 2D. Diagnóstico opt-in local, medir GPU/CPU/compositor e frame pacing. Ver [ADR-009](../ADR-009-RENDER-PERFORMANCE.md).
+
+ENG-12 (P1 experimental): one active WebGL context for color and fish; depth-ordered composition removes dynamic mask; existing WebGL1-compatible shader retained for isolation. Two Canvas2D overlays remain; validate optical ordering. Three.js/WebGL2 decision pending comparative measurement. See [P1](../P1-UNIFIED-RENDERER.md).

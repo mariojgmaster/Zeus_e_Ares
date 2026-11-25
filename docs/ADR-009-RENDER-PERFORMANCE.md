@@ -17,3 +17,6 @@ P0 diagnostic: get local JSON, driver status and Spector frame; identify CPU/GPU
 P1 isolated vertical slice: same 2 fish, original scene, one context, static visual parity and then one animated plant; compare direct sorted alpha vs prior ROI. Benchmark raw WebGL2 vs Three.js under same workload, not synthetic marketing demos.
 P2 full living scene: bake static runs (preserve order), atlas where useful with edge padding, batch foliage, GPU optics, eliminate extra full-screen passes, separate decision/physics/render, cache allocations. Tests for translucent overlap, roots, depth, night, feeding, respiration, resize and inspect.
 P3 release gate: representative physical hardware, frame pacing, long soak, loading and device fallback. Keep original reference and no merge until visual+performance signoff. Driftwood and future content still pending. Do not introduce other scenes.
+
+## P1 implementation update
+Raw WebGL1-compatible prototype first, preserving original shader/mesh data for architecture isolation. Three.js/WebGL2 remains candidate, not installed. Two 2D overlays remain and ordering differs in P1; no visual/performance approval. Six-mode lab compares unified with earlier paths. [P1](P1-UNIFIED-RENDERER.md).

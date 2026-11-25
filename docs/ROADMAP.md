@@ -64,3 +64,5 @@ Ver [índice de especificações](specifications/README.md). Nenhuma entrega fut
 
 ### Gate de lançamento: Performance Recovery
 ADR-009: diagnóstico e vertical slice de renderizador único antes de 0.33.7C/D e Living Driftwood. 0.33.7B.1 ainda não homologada por performance; não substituir baseline até prova comparativa.
+
+P1 candidate: opt-in unified raw renderer, P0 physical benchmark still open. P2 batching/Three.js decision and launch gate pending.

@@ -18,3 +18,5 @@ Toda nova decisão deve ter ID, descrição, critérios verificáveis, estado e 
 - [0.33.7B.1](../MVP-0.33.7B.1.md) — frame pacing e carregamento.
 
 - [ADR-009](../ADR-009-RENDER-PERFORMANCE.md) — diagnóstico, alternativas de mercado e gate de lançamento.
+
+- [P1 Unified Renderer](../P1-UNIFIED-RENDERER.md) — experimental sorted GPU scene and benchmark.

@@ -1,0 +1,2 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {depthGroups} from '../src/engine/gpuLivingScene.js';
+test('ordered render inserts each fish once at authored depth; ties stay in front',()=>{const fish=[{id:'front',z:1.12},{id:'behind',z:.8},{id:'tie',z:.9}];assert.deepEqual(depthGroups(fish).map(g=>g.map(f=>f.id)),[['behind'],[],['tie'],[],['front']]);assert.deepEqual(depthGroups(fish,false).map(g=>g.map(f=>f.id)),[[],[],[],[],['behind','tie','front']]);assert.equal(fish[0].id,'front');});
