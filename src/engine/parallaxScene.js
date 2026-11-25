@@ -1,3 +1,4 @@
+import {plantProfile,wakeTarget,advanceWake,drawBentPlant} from './livingVegetation.js';
 // Aqua Eterna — independent photographic planes. Greater z is nearer the glass.
 export const PLANES=[.83,.90,.97,1.065];
 export const CAMERA_FACTORS=PLANES.map(z=>(z-.70)/.365);
@@ -23,7 +24,33 @@ export async function buildParallaxScene(manifest,load){
  const packed=new Uint8Array(w*h*4);for(let i=0;i<planes.length;i++){const rgba=planes[i].canvas.getContext('2d').getImageData(0,0,w,h).data;for(let p=0;p<w*h;p++)packed[p*4+i]=rgba[p*4+3];}
  // Apply color scattering only after the alpha maps are captured. Source-atop preserves alpha.
  if(optics.enabled){for(const [i,p] of planes.entries()){const g=p.canvas.getContext('2d');g.save();g.globalCompositeOperation='source-atop';g.fillStyle=`rgba(39,101,99,${[.14,.10,.065,.032][i]})`;g.fillRect(0,0,w,h);g.restore();}farCtx.fillStyle='rgba(34,91,91,.16)';farCtx.fillRect(0,0,w,h);}
- return {w,h,far,planes,packed,layers,assets,surface,optics,drawOptics(ctx,rect,time=0,strength=1,night=0){if(optics.enabled)drawWaterOptics(ctx,rect,surface,time,strength,night,optics);},draw(ctx,rect,shift=[0,0]){const {x,y,dw,dh}=rect;ctx.drawImage(far,x,y,dw,dh);for(const p of planes){const k=cameraFactor(p.z);ctx.drawImage(p.canvas,x+shift[0]*dw*k,y+shift[1]*dh*k,dw,dh);}}};
+ // Keep the homologated static scene as an exact A/B reference.
+ const baseline={far,planes,packed};let active=baseline,spare=null,updatedAt=-Infinity;
+ const sorted=[...layers].sort((a,b)=>a.z-b.z),pad=18,wakes=new Map();
+ const sprites=sorted.map(l=>{const c=document.createElement('canvas');c.width=Math.ceil(l.w)+2*pad;c.height=Math.ceil(l.h)+2*pad;drawLayer(c.getContext('2d'),assets[l.asset],{...l,x:pad,y:pad});return {l,c};});
+ const makeFrame=()=>({far:make(),planes:PLANES.map(z=>({z,canvas:make()})),packed:new Uint8Array(w*h*4)});
+ const waterBase=make(),wb=waterBase.getContext('2d');wb.filter=`saturate(${grade.saturation??1}) contrast(${grade.contrast??1}) brightness(${grade.brightness??1})`;wb.drawImage(water,0,0,w,h);
+ function stage(time,flow,fish,enabled=true,interval=.075){
+  if(!enabled){wakes.clear();updatedAt=-Infinity;return active===baseline?null:baseline;}
+  if(time-updatedAt<interval)return null;
+  const dt=Number.isFinite(updatedAt)?Math.min(.35,time-updatedAt):.075;updatedAt=time;
+  const next=spare??makeFrame();spare=null;
+  const fc=next.far.getContext('2d');fc.clearRect(0,0,w,h);fc.drawImage(waterBase,0,0);
+  for(const p of next.planes)p.canvas.getContext('2d',{willReadFrequently:true}).clearRect(0,0,w,h);
+  for(const {l,c} of sprites){
+   const g=(next.planes.find(p=>p.z===l.z)?.canvas??next.far).getContext('2d');
+   if(plantProfile(l.asset)){const wake=advanceWake(wakes.get(l.id)??0,wakeTarget(l,fish),dt);wakes.set(l.id,wake);drawBentPlant(g,c,l,time,flow,wake,pad);}
+   else g.drawImage(c,l.x-pad,l.y-pad);
+  }
+  for(const [i,p] of next.planes.entries()){
+   const g=p.canvas.getContext('2d'),rgba=g.getImageData(0,0,w,h).data;
+   for(let j=0;j<w*h;j++)next.packed[j*4+i]=rgba[j*4+3];
+   if(optics.enabled){g.save();g.globalCompositeOperation='source-atop';g.fillStyle=`rgba(39,101,99,${[.14,.10,.065,.032][i]})`;g.fillRect(0,0,w,h);g.restore();}
+  }
+  if(optics.enabled){fc.fillStyle='rgba(34,91,91,.16)';fc.fillRect(0,0,w,h);}
+  return next;
+ }
+ const scene={w,h,far,planes,packed,layers,assets,surface,optics,stage,commit(next){if(!next||next===active)return false;if(active!==baseline)spare=active;active=next;scene.far=next.far;scene.planes=next.planes;scene.packed=next.packed;return true;},drawOptics(ctx,rect,time=0,strength=1,night=0){if(optics.enabled)drawWaterOptics(ctx,rect,surface,time,strength,night,optics);},draw(ctx,rect,shift=[0,0]){const {x,y,dw,dh}=rect;ctx.drawImage(active.far,x,y,dw,dh);for(const p of active.planes){const k=cameraFactor(p.z);ctx.drawImage(p.canvas,x+shift[0]*dw*k,y+shift[1]*dh*k,dw,dh);}}};return scene;
 }
 export async function loadParallaxScene(base){const url=base.replace(/\/?$/,'/');const res=await fetch(url+'scene.json');if(!res.ok)throw Error('Parallax manifest unavailable');const manifest=await res.json();return buildParallaxScene(manifest,id=>new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(Error('Missing parallax asset '+id));im.src=url+id+'.webp';}));}
 

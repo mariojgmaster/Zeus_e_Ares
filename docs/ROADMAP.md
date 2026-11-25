@@ -14,8 +14,8 @@ Aquário virtual afetivo e biologicamente inspirado, offline, interativo e proce
 | 0.32.3 | Authored Vegetation Matte | Máscara vetorial em resolução nativa; preservar correção de profundidade; candidata à homologação |
 | 0.33.0 | Living Habitat Parallax | 24 instâncias independentes; 5 planos; substitui máscara estática no cenário padrão |
 | 0.33.1 | Natural Color | Graduação de cores naturais, aprovada visualmente na prévia |
-| 0.33.2 | Underwater Optics | Integração dos recursos e óptica subaquática; candidata à homologação completa |
-| 0.33.3 | Living Vegetation | Movimento orgânico das folhas e resposta aos peixes |
+| 0.33.2 | Underwater Optics | Integração dos recursos e óptica subaquática; homologada pelo usuário em 25/11/2026 (8/8) |
+| 0.33.3 | Living Vegetation | Movimento orgânico das plantas e resposta aos peixes; candidata à homologação |
 | 0.34 | Water Physics | Superfície, correnteza, ondulações e partículas coerentes |
 | 0.35 | Natural Lighting | Sombras e ciclo de iluminação diária |
 | 0.36 | Environmental Physics | Colisões volumétricas, refúgios, desvio e integração ambiente/biologia |
@@ -39,3 +39,13 @@ Mapa de profundidade estático em espaço da fotografia, 512 x 288 (147.456 byte
 - Chromium headless, Canvas Worker: 1280 x 720 e 390 x 844, alternância profundidade, clássico/natural e observação, sem erros de página.
 - Rasterizador software, teste controlado de oclusão em 1280 x 720: posição z=0,79, 4.399 pixels do peixe sem máscara e 68 com máscara; z=1,13, 8.977 pixels com/sem máscara. Valores não são métricas de FPS.
 - WebGL em GPU física, validação visual, desempenho e regressão biológica prolongada ainda pendentes.
+
+## 0.33.3 — critérios de homologação
+1. Raízes fixas, plantas com fases e rigidez distintas, sem cortes visíveis.
+2. Corrente altera suavemente amplitude e repouso.
+3. Passagem próxima de Zeus/Ares causa deslocamento amortecido, restrito à profundidade e velocidade.
+4. Oclusão acompanha a silhueta animada sem halos ou atravessamentos.
+5. Troncos, pedras, cascalho, cores e óptica permanecem estáveis.
+6. Controle Vegetação permite comparação exata com a 0.33.2; respeita redução de movimento inicial.
+7. WebGL, Canvas Worker e Canvas 3D mantêm consistência visual e FPS aceitável; verificar desktop e mobile.
+8. Alimentação, respiração, personalidade, observação, cenário e controles sem regressões.
