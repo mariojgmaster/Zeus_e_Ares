@@ -1,3 +1,4 @@
+export function releaseParallaxFrame(frame){if(!frame?.external)return;frame.far.close?.();for(const p of frame.planes)p.canvas.close?.();}
 import {plantProfile,wakeTarget,advanceWake,drawBentPlant} from './livingVegetation.js';
 // Aqua Eterna — independent photographic planes. Greater z is nearer the glass.
 export const PLANES=[.83,.90,.97,1.065];
@@ -21,31 +22,32 @@ export function drawLayer(ctx,im,l){ctx.save();ctx.globalAlpha=l.opacity??1;ctx.
 export function dynamicMaskSize(w,h){return {maskW:Math.ceil(w/2),maskH:Math.ceil(h/2)};}
 export function packAlpha(target,rgba,channel){for(let i=channel,j=3;j<rgba.length;i+=4,j+=4)target[i]=rgba[j];}
 export function vegetationInterval(base,cost){return Math.min(.16,Math.max(base,Math.max(0,cost)/1000*4));}
-export async function buildParallaxScene(manifest,load){
+export async function buildParallaxScene(manifest,load,canvasFactory=()=>document.createElement('canvas')){
  const {width:w,height:h,layers}=manifest;const ids=[...new Set(layers.map(l=>l.asset))];const assets=Object.fromEntries(await Promise.all(ids.map(async id=>[id,await load(id)])));const water=await load('water');const optics=manifest.waterOptics??{};const surface=optics.enabled?await load('surface'):null;
- const make=()=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;};const far=make(),farCtx=far.getContext('2d');const grade=manifest.waterGrade??{};farCtx.filter=`saturate(${grade.saturation??1}) contrast(${grade.contrast??1}) brightness(${grade.brightness??1})`;farCtx.drawImage(water,0,0,w,h);farCtx.filter='none';
+ const make=()=>{const c=canvasFactory();c.width=w;c.height=h;return c;};const far=make(),farCtx=far.getContext('2d');const grade=manifest.waterGrade??{};farCtx.filter=`saturate(${grade.saturation??1}) contrast(${grade.contrast??1}) brightness(${grade.brightness??1})`;farCtx.drawImage(water,0,0,w,h);farCtx.filter='none';
  const planes=PLANES.map(z=>({z,canvas:make()}));for(const l of [...layers].sort((a,b)=>a.z-b.z)){const c=planes.find(p=>p.z===l.z)?.canvas??far;drawLayer(c.getContext('2d'),assets[l.asset],l);}
  const packed=new Uint8Array(w*h*4);for(let i=0;i<planes.length;i++){const rgba=planes[i].canvas.getContext('2d').getImageData(0,0,w,h).data;for(let p=0;p<w*h;p++)packed[p*4+i]=rgba[p*4+3];}
  // Apply color scattering only after the alpha maps are captured. Source-atop preserves alpha.
  if(optics.enabled){for(const [i,p] of planes.entries()){const g=p.canvas.getContext('2d');g.save();g.globalCompositeOperation='source-atop';g.fillStyle=`rgba(39,101,99,${[.14,.10,.065,.032][i]})`;g.fillRect(0,0,w,h);g.restore();}farCtx.fillStyle='rgba(34,91,91,.16)';farCtx.fillRect(0,0,w,h);}
  // Keep the homologated static scene as an exact A/B reference.
  const baseline={far,planes,packed,maskW:w,maskH:h};let active=baseline,spare=null,updatedAt=-Infinity;
- const {maskW,maskH}=dynamicMaskSize(w,h),maskCanvas=document.createElement('canvas');maskCanvas.width=maskW;maskCanvas.height=maskH;const maskCtx=maskCanvas.getContext('2d',{willReadFrequently:true});
+ const {maskW,maskH}=dynamicMaskSize(w,h),maskCanvas=canvasFactory();maskCanvas.width=maskW;maskCanvas.height=maskH;const maskCtx=maskCanvas.getContext('2d',{willReadFrequently:true});
  const stats={stageMs:0,maskMs:0,updates:0,bytes:packed.byteLength,interval:0};
- const sorted=[...layers].sort((a,b)=>a.z-b.z),pad=18,wakes=new Map();
- const sprites=sorted.map(l=>{const c=document.createElement('canvas');c.width=Math.ceil(l.w)+2*pad;c.height=Math.ceil(l.h)+2*pad;drawLayer(c.getContext('2d'),assets[l.asset],{...l,x:pad,y:pad});return {l,c};});
+ const sorted=[...layers].sort((a,b)=>a.z-b.z),pad=18,wakes=new Map();let batches=null,waterBase=null;
+ function prepare(){if(batches)return;
+ const sprites=sorted.map(l=>{const c=canvasFactory();c.width=Math.ceil(l.w)+2*pad;c.height=Math.ceil(l.h)+2*pad;drawLayer(c.getContext('2d'),assets[l.asset],{...l,x:pad,y:pad});return {l,c};});
  // Consecutive static objects at each depth are rasterized once, preserving layer order.
- const batches=[];
+ batches=[];
  for(const item of sprites){const {l,c}=item;if(plantProfile(l.asset)){batches.push(item);continue;}
   const last=batches[batches.length-1];if(last?.static&&last.z===l.z){last.ctx.drawImage(c,l.x-pad,l.y-pad);continue;}
   const canvas=make(),ctx=canvas.getContext('2d');ctx.drawImage(c,l.x-pad,l.y-pad);batches.push({static:true,z:l.z,canvas,ctx});
  }
+ waterBase=make();const wb=waterBase.getContext('2d');wb.filter=`saturate(${grade.saturation??1}) contrast(${grade.contrast??1}) brightness(${grade.brightness??1})`;wb.drawImage(water,0,0,w,h);}
  const makeFrame=()=>({far:make(),planes:PLANES.map(z=>({z,canvas:make()})),maskW,maskH,packed:new Uint8Array(maskW*maskH*4)});
- const waterBase=make(),wb=waterBase.getContext('2d');wb.filter=`saturate(${grade.saturation??1}) contrast(${grade.contrast??1}) brightness(${grade.brightness??1})`;wb.drawImage(water,0,0,w,h);
  function stage(time,flow,fish,enabled=true,interval=.075){
   if(!enabled){wakes.clear();updatedAt=-Infinity;return active===baseline?null:baseline;}
   interval=vegetationInterval(interval,stats.stageMs);stats.interval=interval;if(time-updatedAt<interval)return null;
-  const start=performance.now();
+  const start=performance.now();prepare();
   const dt=Number.isFinite(updatedAt)?Math.min(.35,time-updatedAt):.075;updatedAt=time;
   const next=spare??makeFrame();spare=null;
   const fc=next.far.getContext('2d');fc.clearRect(0,0,w,h);fc.drawImage(waterBase,0,0);
@@ -63,7 +65,7 @@ export async function buildParallaxScene(manifest,load){
   if(optics.enabled){fc.fillStyle='rgba(34,91,91,.16)';fc.fillRect(0,0,w,h);}
   stats.maskMs=performance.now()-maskStart;const elapsed=performance.now()-start;stats.stageMs=stats.updates?stats.stageMs*.8+elapsed*.2:elapsed;stats.updates++;return next;
  }
- const scene={w,h,far,planes,packed,maskW:w,maskH:h,stats,layers,assets,surface,optics,stage,commit(next){if(!next||next===active)return false;if(active!==baseline)spare=active;active=next;scene.far=next.far;scene.planes=next.planes;scene.packed=next.packed;scene.maskW=next.maskW;scene.maskH=next.maskH;stats.bytes=next.packed.byteLength;return true;},drawOptics(ctx,rect,time=0,strength=1,night=0){if(optics.enabled)drawWaterOptics(ctx,rect,surface,time,strength,night,optics);},draw(ctx,rect,shift=[0,0]){const {x,y,dw,dh}=rect;ctx.drawImage(active.far,x,y,dw,dh);for(const p of active.planes){const k=cameraFactor(p.z);ctx.drawImage(p.canvas,x+shift[0]*dw*k,y+shift[1]*dh*k,dw,dh);}}};return scene;
+ const scene={w,h,far,planes,packed,maskW:w,maskH:h,stats,layers,assets,surface,optics,stage,commit(next){if(!next||next===active)return false;if(active.external)releaseParallaxFrame(active);else if(active!==baseline)spare=active;active=next;scene.far=next.far;scene.planes=next.planes;scene.packed=next.packed;scene.maskW=next.maskW;scene.maskH=next.maskH;stats.bytes=next.packed.byteLength;if(next.stats)Object.assign(stats,next.stats,{bytes:next.packed.byteLength});return true;},dispose(){if(active.external)releaseParallaxFrame(active);active=baseline;},drawOptics(ctx,rect,time=0,strength=1,night=0){if(optics.enabled)drawWaterOptics(ctx,rect,surface,time,strength,night,optics);},draw(ctx,rect,shift=[0,0]){const {x,y,dw,dh}=rect;ctx.drawImage(active.far,x,y,dw,dh);for(const p of active.planes){const k=cameraFactor(p.z);ctx.drawImage(p.canvas,x+shift[0]*dw*k,y+shift[1]*dh*k,dw,dh);}}};return scene;
 }
 export async function loadParallaxScene(base){const url=base.replace(/\/?$/,'/');const res=await fetch(url+'scene.json');if(!res.ok)throw Error('Parallax manifest unavailable');const manifest=await res.json();return buildParallaxScene(manifest,id=>new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(Error('Missing parallax asset '+id));im.src=url+id+'.webp';}));}
 
