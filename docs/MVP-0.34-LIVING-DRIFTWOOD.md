@@ -1,5 +1,5 @@
 # MVP 0.34 — Living Driftwood (planejamento; não implementada)
-Dependência: homologação de performance 0.33.4. Preservar Water Physics como 0.34.1.
+Dependência: homologação da recuperação de performance (0.33.5 ou sucessora; 0.33.4 reprovada). Preservar Water Physics como 0.34.1.
 
 ## Geometria authored
 O recurso wood.webp já contém silhueta e áreas visualmente escuras. Escuro não implica abertura. Mapear manualmente o asset original (coordenadas locais, antes de recorte/câmera), diferenciando madeira sólida, cavidade interna, abertura efetiva e sombra decorativa. A captura anotada pelo usuário mostra uma trajetória aproximada da extremidade direita para a abertura à esquerda; não comprova uma cavidade contínua. Criar máscaras frontal/traseira e grafo de corredores somente onde for visualmente plausível. Revisar todas as aberturas com a imagem original e manter o cenário existente. Não perfurar pixels arbitrariamente.
@@ -18,5 +18,5 @@ A transição entre dentro e fora deve ser contínua, com oclusão frontal, visi
 3. Saída sempre alcançável, inclusive para respirar.
 4. Oclusão sem salto, halo ou peixe visível através da madeira.
 5. Curvas orgânicas e variação de comportamento; coexistência sem interpenetração.
-6. Sem regressão no FPS em relação à 0.33.4 homologada.
+6. Sem regressão no FPS em relação à versão de recuperação de performance homologada.
 7. Cobertura de testes determinísticos de grafo, clearance, estados, saída e regressão visual.
