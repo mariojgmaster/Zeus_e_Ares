@@ -22,7 +22,8 @@ Estados: H = homologado pelo usuário; P = parcial; R = reprovado; C = candidato
 | 0.33.4 | Performance Recovery | R travamentos persistem, CI passou, PR #7 |
 | 0.33.5 | Fluid Engine | R, FPS aproximadamente dobrou mas cenário quebrou, PR #8 |
 | 0.33.6 | Visual Rollback | E, runtime 0.33.4 restaurado, docs mantidas, desempenho pendente |
-| 0.33.7 | GPU-native Habitat | F, arquitetura proposta em ADR-008 |
+| 0.33.7A | GPU Static Scene | C, arquitetura aprovada; paridade em validação |
+| 0.33.7B–D | Vegetação GPU, física e validação | F |
 | 0.34 | Living Driftwood | F, bloqueada pela fluidez |
 | 0.34.1 | Water Physics | F |
 | 0.35 | Natural Lighting | F |
@@ -40,3 +41,5 @@ D-01: baseline visual 0.23; evitar mudança sem necessidade. D-02: migração Re
 Branches e PRs encadeados, sem promover para master sem homologação do usuário e CI aplicável. Atualizar docs, status, testes, evidências e riscos no mesmo PR. Registrar feedback literal relevante, versionar critérios de aceite, não ocultar bloqueios. Para cada novo requisito indicar ID/estado/teste/versão e preservar histórico. Versões antigas não recuperadas integralmente: inventário acima contém apenas fatos conhecidos; completar com evidência histórica quando disponível.
 
 D-08: reverter runtime da 0.33.5; não aceitar ganho de FPS com quebra visual; experimentar GPU-native Habitat em etapas protegidas por flag. PR #8 preservada como histórico, sem merge. Metas e numeração 0.33.7A–D são propostas.
+
+D-09: usuário aprovou ADR-008 e etapa A. Manter padrão original, preservar composição e realizar paridade antes de deformação.

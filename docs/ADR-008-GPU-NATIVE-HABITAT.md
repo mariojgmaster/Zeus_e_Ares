@@ -1,5 +1,5 @@
 # ADR-008 — GPU-native Living Habitat / single scene renderer
-Status: proposed, not implemented. 2026-11-25.
+Status: approved by user; stage A candidate, stages B–D pending. 2026-11-25.
 ## Context and rollback
 User reported 0.33.5 approximately doubled FPS but broke the scene; rejected. Exact failure mode not established: no screenshot, browser trace or controlled pixel comparison for this regression. Prior 0.33.4 preserves the previously reported visual experience but was rejected for stuttering. Rollback restores all runtime, assets, configuration and tests from commit 8a4c2eedb606396373d2d237c31c5967330376c2; retain specifications from rejected experiment. 0.33.2 remains the fully accepted static reference. No merge to master.
 ## Decision proposal
@@ -19,3 +19,6 @@ GPU-first retained scene, WebGL on existing stack; no new framework or WebGPU de
 - Preserve behavior, fish anatomy, controls and biological respiration. No merge until user approves visuals AND performance.
 ## Future habitat
 Living Driftwood remains blocked until both pass. Static authored cavity/portals, physically valid widths, connected paths and emergency breathing egress; one scene renderer can layer front/rear wood and cavity masks. Water Physics, Natural Lighting, Environmental Physics, Cinematic Aquarium unchanged. Do not invent hidden cavity from dark pixels.
+
+## Stage A implementation boundary
+[0.33.7A](MVP-0.33.7A.md) uses pregraded native static planes, shared GL context and one-time GPU alpha target. A cached Canvas bridge preserves optical/food/night layer order. Individual textured plant meshes and bridge removal are deferred to later validated stages; no claims of performance gain or complete GPU-native architecture.
