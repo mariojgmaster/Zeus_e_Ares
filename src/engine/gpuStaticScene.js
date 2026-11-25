@@ -5,10 +5,10 @@ export function planeRect(rect,z,shift=[0,0]){
  const k=(z-.70)/.365;return [rect.x+shift[0]*rect.dw*k,rect.y+shift[1]*rect.dh*k,rect.dw,rect.dh];
 }
 const vertex=`attribute vec2 uv;uniform vec4 rect;uniform vec2 screen;uniform float maskPass;varying vec2 v;void main(){v=uv;vec2 p=rect.xy+uv*rect.zw;gl_Position=maskPass>.5?vec4(uv*2.-1.,0.,1.):vec4(p/screen*vec2(2.,-2.)+vec2(-1.,1.),0.,1.);}`;
-const fragment=`precision mediump float;varying vec2 v;uniform sampler2D image;uniform float maskPass;void main(){vec4 c=texture2D(image,v);gl_FragColor=maskPass>.5?vec4(c.a):c;}`;
+const fragment=`precision highp float;varying vec2 v;uniform sampler2D image;uniform float maskPass;void main(){vec4 c=texture2D(image,v);gl_FragColor=maskPass>.5?vec4(c.a):c;}`;
 export function createGpuStaticScene(gl,source){
  const {far,planes}=source,w=far.width,h=far.height;
- if(gl.isContextLost()||planes.length!==4||planes.some((p,i)=>p.z!==DEPTH_PLANES[i]||p.canvas.width!==w||p.canvas.height!==h)||w>gl.getParameter(gl.MAX_TEXTURE_SIZE)||h>gl.getParameter(gl.MAX_TEXTURE_SIZE))throw Error('GPU static capability/dimensions');
+ if(gl.isContextLost()||!gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER,gl.HIGH_FLOAT)?.precision||planes.length!==4||planes.some((p,i)=>p.z!==DEPTH_PLANES[i]||p.canvas.width!==w||p.canvas.height!==h)||w>gl.getParameter(gl.MAX_TEXTURE_SIZE)||h>gl.getParameter(gl.MAX_TEXTURE_SIZE))throw Error('GPU static capability/dimensions');
  const shaders=[],textures=[];let program=null,buffer=null,fbo=null,mask=null,disposed=false;
  const stats={uploads:0,maskBuilds:0,compositions:0};
  function dispose(){if(disposed)return;disposed=true;for(const t of textures)gl.deleteTexture(t);if(mask)gl.deleteTexture(mask);if(fbo)gl.deleteFramebuffer(fbo);if(buffer)gl.deleteBuffer(buffer);if(program)gl.deleteProgram(program);for(const s of shaders)gl.deleteShader(s);}
