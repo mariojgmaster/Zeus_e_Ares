@@ -72,3 +72,7 @@ P0 physical reports received; P1 performance failed (12.20 FPS unified animated)
 P1.1 candidate: ten-phase Pixel Budget & Resolution Lab. P1.2 static batching and P1.3 optical optimization pending benchmark evidence; P2/P3 and Driftwood remain blocked.
 
 P1.1 diagnostic validated (37.60 FPS native twice); P1.2 proposed retained GPU Living + independent pixel budgets; P1.3 optics; 60 FPS and visual gate still open. [Results](PERFORMANCE-P1.1.md).
+
+P1.2 candidate: retained GPU Living with independent surface budgets and paired lab. P1.3 optical engine pending physical/visual evaluation. P3 and Driftwood blocked.
+
+P1.2 quick diagnostic analyzed (45.81 FPS balanced, 45.58 native-soft). P1.3 proposed: optimized optical passes, same-buffer comparison, visual parity; no release approval. [Results](PERFORMANCE-P1.2.md).
