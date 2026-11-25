@@ -1,6 +1,6 @@
 # AQUA ETERNA — Zeus & Ares
 
-MVP 0.32 — React + Docker (homologada em 25/11/2026). MVP 0.33.2 — Underwater Optics (candidata à homologação integrada). Baseline 0.31 homologada pelo usuário e integrada à master; PRs #1, #2, #3. A versão 0.32 preserva o motor procedural, texturas, cenários, shaders e geometria; React monta a interface e o adaptador administra o ciclo de vida do motor.
+MVP 0.32 — React + Docker (homologada em 25/11/2026). MVP 0.33.2 — Underwater Optics (homologada pelo usuário em 25/11/2026 (8/8 critérios)). Baseline 0.31 homologada pelo usuário e integrada à master; PRs #1, #2, #3. A versão 0.32 preserva o motor procedural, texturas, cenários, shaders e geometria; React monta a interface e o adaptador administra o ciclo de vida do motor.
 
 ## Executar com Docker
 ```sh
@@ -36,4 +36,4 @@ O lockfile precisa ser gerado por npm e versionado antes de tratar o build como 
 O motor continua imperativo para evitar regressões de performance e de animação. Não habilitar minificação sem validar a serialização de funções do Canvas Worker. Microfone necessita HTTPS ou localhost; não há backend nem transmissão de áudio a terceiros. As fotos de referência estão em repositório público. Personalidades são simulações, não reconstruções comprovadas. A versão 0.31 pode ser recuperada no commit dc01536d9a1e85ea2fed8547407a8d1602c2d946.
 
 ## Validação pendente
-Build npm, Docker e smoke tests precisam ser executados em ambiente com dependências e Docker. Homologação visual e teste em GPU física/microfone permanecem necessários. Não promover a branch antes da homologação integrada da 0.33.2. Parallax é o cenário padrão; botão Cenário alterna para Natural e Clássico. A câmera parallax móvel é limitada ao WebGL; Canvas/Worker mantém câmera estática com oclusão por plano. A geometria é 2.5D, não volumétrica.
+Build npm, Docker e smoke tests precisam ser executados em ambiente com dependências e Docker. Homologação visual e teste em GPU física/microfone permanecem necessários. Homologação integrada da 0.33.2 concluída pelo usuário (8/8); promoção depende das verificações técnicas aplicáveis. Parallax é o cenário padrão; botão Cenário alterna para Natural e Clássico. A câmera parallax móvel é limitada ao WebGL; Canvas/Worker mantém câmera estática com oclusão por plano. A geometria é 2.5D, não volumétrica.
