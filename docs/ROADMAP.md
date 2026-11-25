@@ -15,8 +15,10 @@ Aquário virtual afetivo e biologicamente inspirado, offline, interativo e proce
 | 0.33.0 | Living Habitat Parallax | 24 instâncias independentes; 5 planos; substitui máscara estática no cenário padrão |
 | 0.33.1 | Natural Color | Graduação de cores naturais, aprovada visualmente na prévia |
 | 0.33.2 | Underwater Optics | Integração dos recursos e óptica subaquática; homologada pelo usuário em 25/11/2026 (8/8) |
-| 0.33.3 | Living Vegetation | Movimento orgânico das plantas e resposta aos peixes; candidata à homologação |
-| 0.34 | Water Physics | Superfície, correnteza, ondulações e partículas coerentes |
+| 0.33.3 | Living Vegetation | Movimento orgânico aprovado; regressão de performance reportada |
+| 0.33.4 | Performance Recovery | Recuperação de FPS sem sacrificar modelos nem movimentos |
+| 0.34 | Living Driftwood | Portais por tamanho, cavidade navegável e esconderijo |
+| 0.34.1 | Water Physics | Superfície, correnteza, ondulações e partículas coerentes |
 | 0.35 | Natural Lighting | Sombras e ciclo de iluminação diária |
 | 0.36 | Environmental Physics | Colisões volumétricas, refúgios, desvio e integração ambiente/biologia |
 | 0.37 | Cinematic Aquarium | Câmera, imersão e paisagem sonora |
