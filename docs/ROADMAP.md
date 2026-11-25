@@ -8,12 +8,14 @@ Aquário virtual afetivo e biologicamente inspirado, offline, interativo e proce
 |---|---|---|
 | 0.30 | Living Habitat | Cenário naturalista; composição responsiva; cenário clássico preservado |
 | 0.31 | Depth Engine | Oclusão ambiental por profundidade; integração com WebGL e software |
-| 0.32 | Living Vegetation | Camadas vegetais independentes, movimento orgânico e resposta aos peixes |
-| 0.33 | Water Physics | Superfície, correnteza, ondulações e partículas coerentes |
-| 0.34 | Natural Lighting | Sombras e ciclo de iluminação diária |
-| 0.35 | Environmental Physics | Colisões volumétricas, refúgios, desvio e integração ambiente/biologia |
-| 0.36 | Cinematic Aquarium | Câmera, imersão e paisagem sonora |
-| 0.37 | Performance & Regression | Otimização e consolidação dos testes de regressão |
+| 0.32 | React & Docker | Migração arquitetural solicitada; preservar baseline |
+| 0.32.1 | Vegetation Occlusion Hotfix | Corrigir fragmentação dos peixes; máscara conservadora e lado de profundidade coerente |
+| 0.33 | Living Vegetation | Camadas vegetais independentes, movimento orgânico e resposta aos peixes |
+| 0.34 | Water Physics | Superfície, correnteza, ondulações e partículas coerentes |
+| 0.35 | Natural Lighting | Sombras e ciclo de iluminação diária |
+| 0.36 | Environmental Physics | Colisões volumétricas, refúgios, desvio e integração ambiente/biologia |
+| 0.37 | Cinematic Aquarium | Câmera, imersão e paisagem sonora |
+| 0.38 | Performance & Regression | Otimização e consolidação dos testes de regressão |
 
 ## Requisitos transversais
 - Identidade visual: preservar as texturas fotográficas e as geometrias dos peixes; azul profundo e vermelho-vinho.
@@ -21,7 +23,7 @@ Aquário virtual afetivo e biologicamente inspirado, offline, interativo e proce
 - Física: manter colisões entre peixes e obstáculos; não confundir oclusão visual com colisão física.
 - Interação: vidro, ração, voz (permissão do navegador), perfis, observação, fotografias e controles existentes.
 - Acessibilidade/imersão: controles responsivos, opção de ocultar a interface e comparação com a versão anterior.
-- Arquitetura: HTML único offline, sem novas dependências externas; WebGL com fallback Canvas Worker/Canvas 3D.
+- Arquitetura: React/Vite e Docker a partir de 0.32, preservando execução sem serviços externos; WebGL com fallback Canvas Worker/Canvas 3D.
 - Entrega: PRs encadeados, sem promover à master antes da homologação; preservar baseline e registrar evidências.
 
 ## 0.31 — implementação e limitações
