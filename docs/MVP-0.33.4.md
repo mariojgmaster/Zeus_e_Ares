@@ -13,3 +13,6 @@ Mesmo navegador, GPU, viewport, resolução e controles. Usar cenário Parallax,
 ## Critérios
 1. FPS recuperado e ausência de travamentos. 2. Movimento orgânico preservado. 3. Reação local dos peixes. 4. Oclusão sem novos halos. 5. Raízes e sólidos estáveis. 6. Corrente e A/B funcionam. 7. Desktop/mobile e fallback sem erro. 8. Regressão funcional ausente.
 CI valida build/integração; não substitui medição física. A redução do mapa pode suavizar contornos finos; se aparecer regressão visual, rever resolução/estratégia em vez de aprovar.
+
+## Resultado
+CI da PR #7 concluído com sucesso (run 45628162563); usuário reprovou a fluidez, com travamentos persistentes. Não homologada. Sucedida pela 0.33.5; não tratar redução teórica da máscara como ganho medido de FPS.
