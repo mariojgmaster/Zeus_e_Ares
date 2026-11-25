@@ -2,12 +2,12 @@ name: Aqua Eterna CI
 on:
   pull_request:
   push:
-    branches: [master, 'feature/mvp-0.32-react-docker']
+    branches: [master, 'feature/mvp-0.32-react-docker', 'feature/mvp-0.33-parallax']
 permissions:
   contents: read
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
