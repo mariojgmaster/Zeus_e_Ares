@@ -35,17 +35,18 @@ export async function buildParallaxScene(manifest,load){
  const sorted=[...layers].sort((a,b)=>a.z-b.z),pad=18,wakes=new Map();
  const sprites=sorted.map(l=>{const c=document.createElement('canvas');c.width=Math.ceil(l.w)+2*pad;c.height=Math.ceil(l.h)+2*pad;drawLayer(c.getContext('2d'),assets[l.asset],{...l,x:pad,y:pad});return {l,c};});
  // Consecutive static objects at each depth are rasterized once, preserving layer order.
- const batches=[];
+ let batches=null;
+ function prepareFallback(){if(batches)return;batches=[];
  for(const item of sprites){const {l,c}=item;if(plantProfile(l.asset)){batches.push(item);continue;}
   const last=batches[batches.length-1];if(last?.static&&last.z===l.z){last.ctx.drawImage(c,l.x-pad,l.y-pad);continue;}
   const canvas=make(),ctx=canvas.getContext('2d');ctx.drawImage(c,l.x-pad,l.y-pad);batches.push({static:true,z:l.z,canvas,ctx});
- }
+ }}
  const makeFrame=()=>({far:make(),planes:PLANES.map(z=>({z,canvas:make()})),maskW,maskH,packed:new Uint8Array(maskW*maskH*4)});
  const waterBase=make(),wb=waterBase.getContext('2d');wb.filter=`saturate(${grade.saturation??1}) contrast(${grade.contrast??1}) brightness(${grade.brightness??1})`;wb.drawImage(water,0,0,w,h);
  function stage(time,flow,fish,enabled=true,interval=.075){
   if(!enabled){wakes.clear();updatedAt=-Infinity;return active===baseline?null:baseline;}
   interval=vegetationInterval(interval,stats.stageMs);stats.interval=interval;if(time-updatedAt<interval)return null;
-  const start=performance.now();
+  const start=performance.now();prepareFallback();
   const dt=Number.isFinite(updatedAt)?Math.min(.35,time-updatedAt):.075;updatedAt=time;
   const next=spare??makeFrame();spare=null;
   const fc=next.far.getContext('2d');fc.clearRect(0,0,w,h);fc.drawImage(waterBase,0,0);

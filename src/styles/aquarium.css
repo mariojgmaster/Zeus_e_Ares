@@ -4,3 +4,17 @@
 #root,.aquarium-root{width:100%;height:100%}
 
 button{backdrop-filter:none;-webkit-backdrop-filter:none}#habitatMode{align-self:center;font-size:11px;color:#c8dfdc;padding:0 8px}
+
+.aqua-loading{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 40%,#183c40 0%,#0b242a 48%,#05171b 100%);color:#e5f3ee;opacity:1;transition:opacity .45s ease,visibility .45s;pointer-events:auto;text-align:center}
+.aqua-loading--ready{opacity:0;visibility:hidden;pointer-events:none}
+.aqua-loading-inner{display:flex;align-items:center;flex-direction:column;padding:24px;gap:12px}
+.aqua-loading-mark{width:64px;height:64px;color:#8fc6b7;margin-bottom:8px}
+.aqua-loading-orbit{transform-origin:32px 32px;animation:aqua-orbit 2.5s linear infinite}
+.aqua-loading-kicker{font-size:10px;letter-spacing:.28em;color:#9ec4bb;margin:0}
+.aqua-loading h2{font:400 clamp(28px,6vw,42px) Georgia,serif;letter-spacing:.035em;margin:0}
+.aqua-loading-stage{font-size:12px;color:#b1cbc6;margin:8px 0 0}
+.aqua-loading-track{width:112px;height:2px;background:#8cbdbb26;border-radius:2px;overflow:hidden;margin-top:6px}
+.aqua-loading-track span{display:block;width:40%;height:100%;background:#9bd0c0;border-radius:2px;animation:aqua-progress 1.6s ease-in-out infinite}
+.aqua-loading--ready .aqua-loading-orbit,.aqua-loading--ready .aqua-loading-track span{animation:none}
+@keyframes aqua-orbit{to{transform:rotate(360deg)}}@keyframes aqua-progress{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}
+@media(prefers-reduced-motion:reduce){.aqua-loading,.aqua-loading-orbit,.aqua-loading-track span{animation:none!important;transition:none!important}}
