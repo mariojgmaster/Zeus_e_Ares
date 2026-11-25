@@ -10,7 +10,8 @@ Aquário virtual afetivo e biologicamente inspirado, offline, interativo e proce
 | 0.31 | Depth Engine | Oclusão ambiental por profundidade; integração com WebGL e software |
 | 0.32 | React & Docker | Migração arquitetural homologada pelo usuário em 25/11/2026 |
 | 0.32.1 | Vegetation Occlusion Hotfix | Não homologada: rebarbas nas folhas e escala abrupta | 
-| 0.32.2 | Natural Occlusion & Smooth Depth | Refinamento da máscara, bordas alfa, profundidade gradual; candidata à homologação |
+| 0.32.2 | Natural Occlusion & Smooth Depth | Não homologada: contornos vegetais ainda insatisfatórios | 
+| 0.32.3 | Authored Vegetation Matte | Máscara vetorial em resolução nativa; preservar correção de profundidade; candidata à homologação |
 | 0.33 | Living Vegetation | Camadas vegetais independentes, movimento orgânico e resposta aos peixes |
 | 0.34 | Water Physics | Superfície, correnteza, ondulações e partículas coerentes |
 | 0.35 | Natural Lighting | Sombras e ciclo de iluminação diária |
