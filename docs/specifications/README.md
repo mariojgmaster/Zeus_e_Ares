@@ -22,3 +22,5 @@ Toda nova decisão deve ter ID, descrição, critérios verificáveis, estado e 
 - [P1 Unified Renderer](../P1-UNIFIED-RENDERER.md) — experimental sorted GPU scene and benchmark.
 
 - [P0/P1 physical benchmarks](../PERFORMANCE-P0-P1.md) — measured results, limitations and proposed P1.1.
+
+- [P1.1 Pixel Budget & Resolution Lab](../P1.1-PIXEL-BUDGET.md) — controlled scale and layer tests.

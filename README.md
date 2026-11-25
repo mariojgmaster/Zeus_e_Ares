@@ -61,3 +61,6 @@ Abra /?lab=1, execute diagnóstico com aba visível e sem mexer no mouse, export
 
 ## P1 experimental
 Open /?unified=1 for unified scene. Open /?lab=1 for six-mode comparison; original default preserved. [P1](docs/P1-UNIFIED-RENDERER.md).
+
+## P1.1 — Pixel Budget
+Open /?pixelLab=1, choose quick or extended, run and export JSON. Same viewport, original assets. Normal / remains 100% and /?lab=1 remains six-mode comparison. [Spec](docs/P1.1-PIXEL-BUDGET.md).

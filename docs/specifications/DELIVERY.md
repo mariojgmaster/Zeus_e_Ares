@@ -54,3 +54,5 @@ D-12: usuário reportou A/B animado ainda muito abaixo do estático; PR #12 CI v
 D-13: user authorized P1; PR #13 CI passed but P0 physical JSON missing. Implement raw retained unified prototype behind URL flag first; no dependency migration yet; six-mode lab. No promotion before performance and visual evidence.
 
 D-14: P0 and P1 physical reports received; P1 CI green but performance gate failed. Keep default unchanged; next proposed P1.1 resolution/layer isolation and static caching, Three.js choice deferred. [Evidence](../PERFORMANCE-P0-P1.md).
+
+D-15: user approved P1.1. Diagnostic scale opt-in only; maintain original resources and production defaults; record exact measured settings, restore on cancel/finish. Await physical evidence before next rendering change.
