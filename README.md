@@ -1,6 +1,6 @@
 # AQUA ETERNA — Zeus & Ares
 
-MVP 0.32 — React + Docker (homologada em 25/11/2026). MVP 0.33.2 — Underwater Optics (homologada pelo usuário em 25/11/2026 (8/8 critérios)). Baseline 0.31 homologada pelo usuário e integrada à master; PRs #1, #2, #3. A versão 0.32 preserva o motor procedural, texturas, cenários, shaders e geometria; React monta a interface e o adaptador administra o ciclo de vida do motor.
+MVP 0.32 — React + Docker (homologada em 25/11/2026). MVP 0.33.2 — Underwater Optics (homologada pelo usuário em 25/11/2026 (8/8 critérios)). MVP 0.33.3 — Living Vegetation (candidata à homologação). Baseline 0.31 homologada pelo usuário e integrada à master; PRs #1, #2, #3. A versão 0.32 preserva o motor procedural, texturas, cenários, shaders e geometria; React monta a interface e o adaptador administra o ciclo de vida do motor.
 
 ## Executar com Docker
 ```sh
@@ -37,3 +37,6 @@ O motor continua imperativo para evitar regressões de performance e de animaç�
 
 ## Validação pendente
 Build npm, Docker e smoke tests precisam ser executados em ambiente com dependências e Docker. Homologação visual e teste em GPU física/microfone permanecem necessários. Homologação integrada da 0.33.2 concluída pelo usuário (8/8); promoção depende das verificações técnicas aplicáveis. Parallax é o cenário padrão; botão Cenário alterna para Natural e Clássico. A câmera parallax móvel é limitada ao WebGL; Canvas/Worker mantém câmera estática com oclusão por plano. A geometria é 2.5D, não volumétrica.
+
+## Living Vegetation
+Deformação procedural de plantas por faixas horizontais ancoradas, corrente suave, resposta amortecida à velocidade e profundidade dos peixes, mapa alfa derivado do mesmo raster. WebGL e Canvas 3D atualizam em passos de 75 ms; Canvas Worker publica o ambiente junto ao bitmap compatível, em passos de pelo menos 120 ms. Controle Vegetação restaura a referência estática e respeita prefers-reduced-motion no início. A geometria segue 2.5D; não equivale a folhas 3D independentes. Validação visual, custo de rasterização e CI ainda precisam ser conferidos.
