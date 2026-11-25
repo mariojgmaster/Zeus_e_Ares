@@ -12,3 +12,5 @@ Toda nova decisão deve ter ID, descrição, critérios verificáveis, estado e 
 - [ADR-008 — GPU-native Living Habitat](../ADR-008-GPU-NATIVE-HABITAT.md): rollback 0.33.5, nova arquitetura proposta e gates incrementais.
 
 - [MVP 0.33.7A](../MVP-0.33.7A.md): render estático GPU, ponte transitória, testes e limites.
+
+- [0.33.7B](../MVP-0.33.7B.md) — GPU vivo, cenário único e raízes.

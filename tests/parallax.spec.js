@@ -1,13 +1,11 @@
 import {test,expect} from '@playwright/test';
-test('integrated parallax loads and switches to both legacy scenes',async({page})=>{
+test('integrated parallax loads only one scene',async({page})=>{
  const errors=[];const missing=[];page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.url().includes('/parallax/')&&!r.ok())missing.push(r.url());});
  await page.goto('/');
  const habitat=page.locator('#habitatMode');
  await expect(habitat).toHaveText('Cenário: Parallax',{timeout:30000});
  await page.waitForFunction(()=>performance.getEntriesByType('resource').filter(e=>/\/parallax\/.*\.webp$/.test(e.name)).length===12);
- await habitat.click();await expect(habitat).toHaveText('Cenário: Natural');
- await habitat.click();await expect(habitat).toHaveText('Cenário: Clássico');
- await habitat.click();await expect(habitat).toHaveText('Cenário: Parallax');
+ expect(await page.evaluate(()=>performance.getEntriesByType('resource').filter(e=>/classic-tank|natural-tank|natural-leaf-mask|leaf-[123]/.test(e.name)).map(e=>e.name))).toEqual([]);
  await page.locator('#optics').click();await page.locator('#night').click();
  expect(missing).toEqual([]);expect(errors).toEqual([]);
 });
@@ -27,4 +25,4 @@ test('vegetation A/B and flow controls are independent and respect reduced motio
  await v.click();await expect(v).toHaveAttribute('aria-pressed','false');expect(errors).toEqual([]);
 });
 
-test('performance diagnostics report mask size with vegetation enabled and disabled',async({page})=>{await page.goto('/');await expect(page.locator('#habitatMode')).toHaveText('Cenário: Parallax',{timeout:30000});const v=page.locator('#vegetation'),fps=page.locator('#perf');await fps.click();if(await v.getAttribute('aria-pressed')==='false')await v.click();await expect(fps).toHaveAttribute('title',/Mapa 1\.50 MiB/,{timeout:45000});await v.click();await expect(fps).toHaveAttribute('title',/Mapa 6\.00 MiB/,{timeout:45000});});
+test('performance diagnostics report mask size with vegetation enabled and disabled',async({page})=>{await page.goto('/');await expect(page.locator('#habitatMode')).toHaveText('Cenário: Parallax',{timeout:30000});const v=page.locator('#vegetation'),fps=page.locator('#perf'),live=page.locator('#gpuLiving');if(await live.isEnabled()&&await live.getAttribute('aria-pressed')==='true')await live.click();await fps.click();if(await v.getAttribute('aria-pressed')==='false')await v.click();await expect(fps).toHaveAttribute('title',/Mapa 1\.50 MiB/,{timeout:45000});await v.click();await expect(fps).toHaveAttribute('title',/Mapa 6\.00 MiB/,{timeout:45000});});

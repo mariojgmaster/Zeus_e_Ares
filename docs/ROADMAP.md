@@ -19,8 +19,8 @@ Aquário virtual afetivo e biologicamente inspirado, offline, interativo e proce
 | 0.33.4 | Performance Recovery | CI passou; reprovada pelo usuário por travamentos persistentes |
 | 0.33.5 | Fluid Engine | Reprovada: FPS aproximadamente dobrou, cenário quebrou |
 | 0.33.6 | Visual Rollback | Runtime idêntico à 0.33.4; docs preservadas; não homologada |
-| 0.33.7A | GPU Static Scene | Candidata; A/B estático, máscara GPU e paridade |
-| 0.33.7B | GPU Living Vegetation | Pendente: uma planta, depois expansão |
+| 0.33.7A | GPU Static Scene | Melhora parcial; 13 FPS no Original, não homologada |
+| 0.33.7B | GPU Living Vegetation | Candidata: GPU vivo, Parallax único e ancoragem |
 | 0.33.7C | Unified Environmental Physics | Pendente: proxies locais e fallback |
 | 0.33.7D | Performance & Visual Gate | Pendente: benchmark e regressão |
 | 0.34 | Living Driftwood | Portais por tamanho, cavidade navegável e esconderijo |

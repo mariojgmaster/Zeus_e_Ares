@@ -6,7 +6,7 @@
       "id": "far-red-left",
       "asset": "stems-red",
       "x": -80,
-      "y": 55,
+      "y": 170,
       "w": 315,
       "h": 755,
       "z": 0.7,
@@ -15,13 +15,14 @@
       "blur": 5,
       "opacity": 0.78,
       "saturation": 0.74,
-      "contrast": 0.95
+      "contrast": 0.95,
+      "rootY": 925
     },
     {
       "id": "far-green-left",
       "asset": "stems-green",
       "x": 215,
-      "y": 225,
+      "y": 275,
       "w": 320,
       "h": 650,
       "z": 0.7,
@@ -30,13 +31,14 @@
       "blur": 6,
       "opacity": 0.8,
       "saturation": 0.68,
-      "contrast": 0.95
+      "contrast": 0.95,
+      "rootY": 925
     },
     {
       "id": "far-green-center",
       "asset": "stems-green",
       "x": 565,
-      "y": 190,
+      "y": 230,
       "w": 325,
       "h": 695,
       "z": 0.7,
@@ -45,13 +47,14 @@
       "blur": 6,
       "opacity": 0.76,
       "saturation": 0.68,
-      "contrast": 0.95
+      "contrast": 0.95,
+      "rootY": 925
     },
     {
       "id": "far-red-right",
       "asset": "stems-red",
       "x": 1020,
-      "y": 190,
+      "y": 245,
       "w": 300,
       "h": 680,
       "z": 0.7,
@@ -60,13 +63,14 @@
       "blur": 4,
       "opacity": 0.85,
       "saturation": 0.74,
-      "contrast": 0.95
+      "contrast": 0.95,
+      "rootY": 925
     },
     {
       "id": "far-green-right",
       "asset": "stems-green",
       "x": 1300,
-      "y": 60,
+      "y": 100,
       "w": 410,
       "h": 825,
       "z": 0.7,
@@ -75,7 +79,8 @@
       "blur": 5,
       "opacity": 0.76,
       "saturation": 0.68,
-      "contrast": 0.95
+      "contrast": 0.95,
+      "rootY": 925
     },
     {
       "id": "rear-gravel-left",
@@ -111,7 +116,7 @@
       "id": "mid-green",
       "asset": "stems-green",
       "x": 820,
-      "y": 305,
+      "y": 360,
       "w": 280,
       "h": 565,
       "z": 0.83,
@@ -120,13 +125,14 @@
       "blur": 2,
       "opacity": 1,
       "saturation": 0.68,
-      "contrast": 0.95
+      "contrast": 0.95,
+      "rootY": 925
     },
     {
       "id": "mid-left-green",
       "asset": "stems-green",
       "x": 360,
-      "y": 420,
+      "y": 475,
       "w": 340,
       "h": 450,
       "z": 0.83,
@@ -135,7 +141,8 @@
       "blur": 2,
       "opacity": 1,
       "saturation": 0.68,
-      "contrast": 0.95
+      "contrast": 0.95,
+      "rootY": 925
     },
     {
       "id": "rock-back",
@@ -156,7 +163,7 @@
       "id": "fern-left",
       "asset": "fern-left",
       "x": -165,
-      "y": 20,
+      "y": 82,
       "w": 850,
       "h": 850,
       "z": 0.9,
@@ -165,13 +172,14 @@
       "blur": 0,
       "opacity": 1,
       "saturation": 0.61,
-      "contrast": 0.91
+      "contrast": 0.91,
+      "rootY": 932
     },
     {
       "id": "fern-right",
       "asset": "fern-right",
       "x": 1080,
-      "y": 35,
+      "y": 82,
       "w": 755,
       "h": 850,
       "z": 0.9,
@@ -180,13 +188,14 @@
       "blur": 0,
       "opacity": 1,
       "saturation": 0.61,
-      "contrast": 0.91
+      "contrast": 0.91,
+      "rootY": 932
     },
     {
       "id": "mid-sprouts-left",
       "asset": "sprouts",
       "x": 435,
-      "y": 520,
+      "y": 592,
       "w": 290,
       "h": 340,
       "z": 0.9,
@@ -195,13 +204,14 @@
       "blur": 1,
       "opacity": 1,
       "saturation": 0.58,
-      "contrast": 0.91
+      "contrast": 0.91,
+      "rootY": 932
     },
     {
       "id": "mid-sprouts-right",
       "asset": "sprouts",
       "x": 760,
-      "y": 660,
+      "y": 717,
       "w": 305,
       "h": 215,
       "z": 0.9,
@@ -210,7 +220,8 @@
       "blur": 1,
       "opacity": 1,
       "saturation": 0.58,
-      "contrast": 0.91
+      "contrast": 0.91,
+      "rootY": 932
     },
     {
       "id": "wood",
@@ -231,7 +242,7 @@
       "id": "anubias-right",
       "asset": "anubias",
       "x": 1110,
-      "y": 433,
+      "y": 477,
       "w": 650,
       "h": 455,
       "z": 0.97,
@@ -240,13 +251,14 @@
       "blur": 0,
       "opacity": 1,
       "saturation": 0.69,
-      "contrast": 0.91
+      "contrast": 0.91,
+      "rootY": 932
     },
     {
       "id": "anubias-left",
       "asset": "anubias",
       "x": -70,
-      "y": 530,
+      "y": 576,
       "w": 510,
       "h": 360,
       "z": 1.065,
@@ -255,7 +267,8 @@
       "blur": 0,
       "opacity": 1,
       "saturation": 0.69,
-      "contrast": 0.91
+      "contrast": 0.91,
+      "rootY": 936
     },
     {
       "id": "rock-left",
@@ -291,7 +304,7 @@
       "id": "sprouts-left",
       "asset": "sprouts",
       "x": 390,
-      "y": 738,
+      "y": 785,
       "w": 300,
       "h": 151,
       "z": 1.065,
@@ -300,13 +313,14 @@
       "blur": 0,
       "opacity": 1,
       "saturation": 0.58,
-      "contrast": 0.91
+      "contrast": 0.91,
+      "rootY": 936
     },
     {
       "id": "sprouts-center",
       "asset": "sprouts",
       "x": 840,
-      "y": 770,
+      "y": 802,
       "w": 365,
       "h": 134,
       "z": 1.065,
@@ -315,13 +329,14 @@
       "blur": 0,
       "opacity": 1,
       "saturation": 0.58,
-      "contrast": 0.91
+      "contrast": 0.91,
+      "rootY": 936
     },
     {
       "id": "sprouts-right",
       "asset": "sprouts",
       "x": 1505,
-      "y": 775,
+      "y": 801,
       "w": 185,
       "h": 135,
       "z": 1.065,
@@ -330,7 +345,8 @@
       "blur": 0,
       "opacity": 1,
       "saturation": 0.58,
-      "contrast": 0.91
+      "contrast": 0.91,
+      "rootY": 936
     },
     {
       "id": "front-gravel-left",

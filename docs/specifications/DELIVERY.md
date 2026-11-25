@@ -22,8 +22,9 @@ Estados: H = homologado pelo usuário; P = parcial; R = reprovado; C = candidato
 | 0.33.4 | Performance Recovery | R travamentos persistem, CI passou, PR #7 |
 | 0.33.5 | Fluid Engine | R, FPS aproximadamente dobrou mas cenário quebrou, PR #8 |
 | 0.33.6 | Visual Rollback | E, runtime 0.33.4 restaurado, docs mantidas, desempenho pendente |
-| 0.33.7A | GPU Static Scene | C, arquitetura aprovada; paridade em validação |
-| 0.33.7B–D | Vegetação GPU, física e validação | F |
+| 0.33.7A | GPU Static Scene | P, melhora parcial, 13 FPS Original |
+| 0.33.7B | GPU vivo, cenário único e raízes | C |
+| 0.33.7C–D | Física e validação | F |
 | 0.34 | Living Driftwood | F, bloqueada pela fluidez |
 | 0.34.1 | Water Physics | F |
 | 0.35 | Natural Lighting | F |
@@ -43,3 +44,4 @@ Branches e PRs encadeados, sem promover para master sem homologação do usuári
 D-08: reverter runtime da 0.33.5; não aceitar ganho de FPS com quebra visual; experimentar GPU-native Habitat em etapas protegidas por flag. PR #8 preservada como histórico, sem merge. Metas e numeração 0.33.7A–D são propostas.
 
 D-09: usuário aprovou ADR-008 e etapa A. Manter padrão original, preservar composição e realizar paridade antes de deformação.
+D-10: Parallax único; raízes no cascalho; fluidez 60 FPS. Outros cenários arquivados. Duas passagens GPU transitórias.

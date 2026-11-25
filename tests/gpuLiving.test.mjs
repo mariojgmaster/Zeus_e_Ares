@@ -1,0 +1,3 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {createPoseState} from '../src/engine/gpuLivingScene.js';
+test('authored roots overlap substrate',async()=>{const m=JSON.parse(await readFile(new URL('../public/parallax/scene.json',import.meta.url)));for(const l of m.layers.filter(l=>l.rootY)){assert.equal(l.y+l.h,l.rootY);assert.ok(l.rootY>=925&&l.rootY<=m.height);}});
+test('wake resets when disabled',()=>{const p=createPoseState([{id:'test',asset:'sprouts',x:0,y:0,w:100,h:100,z:.9}]);assert.ok(p.update(1,.05,1,[{x:20,y:20,z:.9,vx:150}],true).wakes[0]>0);assert.deepEqual(p.update(2,.05,1,[],false),{time:2,flow:0,wakes:[0]});});
