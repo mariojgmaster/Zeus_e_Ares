@@ -55,3 +55,6 @@ Parallax único; GPU: Vivo padrão quando suportado. Original e Estático são m
 
 ## 0.33.7B.1
 Tela de carregamento real e otimização de cobertura GPU. [Especificação](docs/MVP-0.33.7B.1.md).
+
+## Performance lab (branch experimental)
+Abra /?lab=1, execute diagnóstico com aba visível e sem mexer no mouse, exporte JSON. Quatro modos, 4s warmup + 12s amostra cada. Não altera render padrão nem envia dados. Ver [ADR-009](docs/ADR-009-RENDER-PERFORMANCE.md).

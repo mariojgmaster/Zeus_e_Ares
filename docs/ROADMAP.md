@@ -61,3 +61,6 @@ Mapa de profundidade estático em espaço da fotografia, 512 x 288 (147.456 byte
 
 ## Especificações permanentes
 Ver [índice de especificações](specifications/README.md). Nenhuma entrega futura deve omitir atualização de requisitos, decisões, pendências e evidências de homologação. Living Driftwood depende da recuperação de fluidez, não especificamente da versão 0.33.4.
+
+### Gate de lançamento: Performance Recovery
+ADR-009: diagnóstico e vertical slice de renderizador único antes de 0.33.7C/D e Living Driftwood. 0.33.7B.1 ainda não homologada por performance; não substituir baseline até prova comparativa.
