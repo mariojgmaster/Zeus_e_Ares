@@ -1,0 +1,37 @@
+// P1.3: bounded reusable optical resources. No scene or fish texture changes.
+const canvas=(w,h)=>Object.assign(document.createElement('canvas'),{width:w,height:h});
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+export const quantizeStrength=a=>Math.round(clamp(a,0,1)*128)/128;
+export const rayIndex=p=>clamp(Math.round((p-.174)/.072*8),0,8);
+export function makeCone(){const c=canvas(256,256),g=c.getContext('2d'),r=g.createRadialGradient(128,128,0,128,128,128);r.addColorStop(0,'rgba(104,171,151,1)');r.addColorStop(.32,'rgba(90,157,144,.68)');r.addColorStop(1,'rgba(70,145,145,0)');g.fillStyle=r;g.fillRect(0,0,256,256);return c;}
+export function baseGradient(ctx,H){const v=ctx.createLinearGradient(0,0,0,H);v.addColorStop(0,'rgba(4,25,32,.10)');v.addColorStop(.42,'rgba(0,22,30,.05)');v.addColorStop(1,'rgba(0,13,16,.20)');return v;}
+export function drawBaseLight2D(ctx,W,H,time,blend,night,gradient,cone){ctx.fillStyle=gradient;ctx.fillRect(0,0,W,H);ctx.save();ctx.globalCompositeOperation='screen';ctx.globalAlpha=(.031+.019*blend)*(1-night*.88);for(let i=0;i<5;i++){const x=W*(.09+i*.21)+Math.sin(time*.13+i*1.7)*W*.035;ctx.save();ctx.translate(x,H*.14);ctx.rotate(-.17+.07*Math.sin(i));ctx.scale(Math.max(12,W*.12),H*.72);ctx.drawImage(cone,-1,-1,2,2);ctx.restore();}ctx.restore();}
+export function createOpticalCache(){
+ const soft=canvas(256,256),g=soft.getContext('2d');if(!g)throw Error('optical cache unavailable');
+ const rays=Array.from({length:9},(_,i)=>{const c=canvas(256,128),x=c.getContext('2d'),r=x.createRadialGradient(128,0,0,128,0,128);r.addColorStop(0,'rgba(177,219,198,'+(.174+.072*i/8)+')');r.addColorStop(.38,'rgba(140,202,188,.12)');r.addColorStop(1,'rgba(108,175,169,0)');x.fillStyle=r;x.fillRect(0,0,256,128);return c;});
+ const shadow=canvas(128,128),s=shadow.getContext('2d'),r=s.createRadialGradient(64,64,0,64,64,64);r.addColorStop(0,'rgba(0,12,16,1)');r.addColorStop(1,'rgba(0,12,16,0)');s.fillStyle=r;s.fillRect(0,0,128,128);
+ const stats={softBuilds:0,rayTextures:9,bytes:(256*256+9*256*128+128*128)*4};let key='';
+ return {stats,drawSoft(ctx,a,config){const q=quantizeStrength(a),k=q+':'+(config.veil??.09);if(key!==k){key=k;g.clearRect(0,0,256,256);const veil=g.createLinearGradient(0,0,0,256);veil.addColorStop(0,'rgba(86,151,144,'+q*(config.veil??.09)+')');veil.addColorStop(.46,'rgba(49,107,110,'+q*.072+')');veil.addColorStop(1,'rgba(18,62,68,'+q*.025+')');g.fillStyle=veil;g.fillRect(0,0,256,256);const glow=g.createRadialGradient(.51*256,.015*256,0,.51*256,.015*256,.61*256);glow.addColorStop(0,'rgba(192,231,208,'+q*.19+')');glow.addColorStop(.28,'rgba(144,202,188,'+q*.085+')');glow.addColorStop(1,'rgba(93,157,156,0)');g.fillStyle=glow;g.fillRect(0,0,256,256);stats.softBuilds++;}ctx.drawImage(soft,0,0,1,1);},
+ drawRay(ctx,a,config,pulse){ctx.save();ctx.globalAlpha=clamp(a*(config.rays??.68),0,1);ctx.drawImage(rays[rayIndex(pulse)],-1,0,2,1);ctx.restore();},
+ drawShadow(ctx,x,y,r,alpha){ctx.save();ctx.translate(x,y);ctx.scale(1,.25);ctx.globalAlpha=alpha;ctx.drawImage(shadow,-r,-r,r*2,r*2);ctx.restore();},
+ dispose(){for(const c of [soft,shadow,...rays])c.width=c.height=1;}
+ };
+}
+const vs=`attribute vec2 uv;varying vec2 v;void main(){v=uv;gl_Position=vec4(uv*vec2(2.,-2.)+vec2(-1.,1.),0.,1.);}`;
+const fs=`precision highp float;varying vec2 v;uniform sampler2D gradient,cone;uniform vec2 screen;uniform vec4 cones[5];uniform float strength;void main(){vec4 d=texture2D(gradient,vec2(.5,v.y));vec2 p=v*screen;for(int i=0;i<5;i++){vec4 c=cones[i];vec2 delta=p-vec2(c.x,screen.y*.14);vec2 q=vec2(c.y*delta.x+c.z*delta.y,-c.z*delta.x+c.y*delta.y)/vec2(c.w,screen.y*.72);if(abs(q.x)<=1.&&abs(q.y)<=1.){vec4 s=texture2D(cone,q*.5+.5)*strength;d=vec4(d.rgb+s.rgb-d.rgb*s.rgb,d.a+s.a-d.a*s.a);}}gl_FragColor=d;}`;
+// Same premultiplied screen compositing as the transparent Canvas2D light overlay,
+// then source-over onto the opaque living habitat. One pass, existing context.
+export function createGpuBaseLight(gl){
+ const shaders=[],textures=[];let prog,buf,loc,disposed=false;const stats={draws:0,uploads:0};const vao=gl.getExtension('OES_vertex_array_object');
+ function dispose(){if(disposed)return;disposed=true;for(const t of textures)gl.deleteTexture(t);for(const s of shaders)gl.deleteShader(s);if(prog)gl.deleteProgram(prog);if(buf)gl.deleteBuffer(buf);}
+ function compile(type,source){const s=gl.createShader(type);shaders.push(s);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s;}
+ function upload(c,unit){const t=gl.createTexture();textures.push(t);gl.activeTexture(unit);gl.bindTexture(gl.TEXTURE_2D,t);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,c);for(const [p,v] of [[gl.TEXTURE_MIN_FILTER,gl.LINEAR],[gl.TEXTURE_MAG_FILTER,gl.LINEAR],[gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE],[gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE]])gl.texParameteri(gl.TEXTURE_2D,p,v);stats.uploads++;c.width=c.height=1;return t;}
+ let grad,cone,screenLoc,conesLoc,strengthLoc;
+ try{if(gl.isContextLost()||!gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER,gl.HIGH_FLOAT)?.precision)throw Error('GPU optics unsupported');prog=gl.createProgram();gl.attachShader(prog,compile(gl.VERTEX_SHADER,vs));gl.attachShader(prog,compile(gl.FRAGMENT_SHADER,fs));gl.linkProgram(prog);if(!gl.getProgramParameter(prog,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(prog));loc=gl.getAttribLocation(prog,'uv');gl.useProgram(prog);gl.uniform1i(gl.getUniformLocation(prog,'gradient'),0);gl.uniform1i(gl.getUniformLocation(prog,'cone'),1);screenLoc=gl.getUniformLocation(prog,'screen');conesLoc=gl.getUniformLocation(prog,'cones[0]');strengthLoc=gl.getUniformLocation(prog,'strength');buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([0,0,1,0,0,1,1,1]),gl.STATIC_DRAW);
+ const c=canvas(1,256),g=c.getContext('2d');g.fillStyle=baseGradient(g,256);g.fillRect(0,0,1,256);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,true);grad=upload(c,gl.TEXTURE0);cone=upload(makeCone(),gl.TEXTURE1);if(gl.getError()!==gl.NO_ERROR)throw Error('GPU optics init');
+ }catch(e){dispose();throw e;}finally{gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,false);gl.activeTexture(gl.TEXTURE0);}
+ const coords=new Float32Array(20);
+ return {stats,draw(W,H,time,blend,night){if(disposed||gl.isContextLost())throw Error('GPU optics unavailable');try{if(vao)vao.bindVertexArrayOES(null);gl.bindFramebuffer(gl.FRAMEBUFFER,null);gl.viewport(0,0,gl.drawingBufferWidth,gl.drawingBufferHeight);gl.useProgram(prog);gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);gl.disable(gl.DEPTH_TEST);gl.disable(gl.CULL_FACE);gl.disable(gl.SCISSOR_TEST);gl.colorMask(true,true,true,true);gl.enable(gl.BLEND);gl.blendFuncSeparate(gl.ONE,gl.ONE_MINUS_SRC_ALPHA,gl.ONE,gl.ONE_MINUS_SRC_ALPHA);
+ gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,grad);gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,cone);for(let i=0;i<5;i++){const a=-.17+.07*Math.sin(i),k=i*4;coords[k]=W*(.09+i*.21)+Math.sin(time*.13+i*1.7)*W*.035;coords[k+1]=Math.cos(a);coords[k+2]=Math.sin(a);coords[k+3]=Math.max(12,W*.12);}gl.uniform2f(screenLoc,W,H);gl.uniform4fv(conesLoc,coords);gl.uniform1f(strengthLoc,(.031+.019*blend)*(1-night*.88));gl.drawArrays(gl.TRIANGLE_STRIP,0,4);stats.draws++;
+ }finally{gl.disableVertexAttribArray(loc);gl.activeTexture(gl.TEXTURE0);}},dispose};
+}

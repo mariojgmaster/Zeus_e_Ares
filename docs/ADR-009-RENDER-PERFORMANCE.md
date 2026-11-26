@@ -35,3 +35,6 @@ GPU Living remains reference. Tight depth/order-preserving static cache and inde
 
 ## P1.2 physical evidence
 Independent surface budgets are the strongest measured improvement; cache-only deltas small, keep optional. P1.3 prioritizes optical passes and compositor isolation at identical buffers. [Results](PERFORMANCE-P1.2.md).
+
+## P1.3 implementation
+Opt-in cached optical primitives and same-context GPU base lighting, reference/cache/GPU comparison. No further reduction in fish or scene backing. [P1.3](P1.3-OPTIMIZED-OPTICS.md).
