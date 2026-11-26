@@ -72,3 +72,5 @@ D-21: P1.3 full CI passed, hardware report and release gate missing; user reques
 D-22: P2.1 full CI PASS; P2.2 tooling implemented, physical report still pending; no automatic approval or merge. [P2.2](../P2.2-CANDIDATE-REVIEW.md).
 
 D-23: two quick reports received; CI P2.1/P2.2 PASS. Extended benchmark and visual gate outstanding, no release approval. [Results](../PERFORMANCE-P2.1-P2.2.md).
+
+D-24: P2.2 extended candidate selected; P3 0/3, no release. Latest prior docs-only CI failed auxiliary inspection smoke; reproduce before promotion. [Evidence](../PERFORMANCE-P3-EXTENDED.md).

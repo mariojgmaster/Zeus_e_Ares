@@ -40,3 +40,5 @@ Toda nova decisão deve ter ID, descrição, critérios verificáveis, estado e 
 - [P2.2 Candidate Review](../P2.2-CANDIDATE-REVIEW.md) — local evidence review and provisional selection.
 
 - [P2.1/P2.2 physical results](../PERFORMANCE-P2.1-P2.2.md) — optical and auxiliary paired comparisons.
+
+- [Extended P2.2/P3 results](../PERFORMANCE-P3-EXTENDED.md) — measured candidate, failed release gate, P3.1 proposal and CI caveat.

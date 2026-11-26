@@ -36,3 +36,5 @@ ENG-20: optional auxiliary tank half-native linear scale only in GPU Living, ori
 ENG-21: P2.2 local review validates P2.1 actual settings and paired measurements; provisional recommendation only after extended sample, stable reference and same-quality cadence checks. [P2.2](../P2.2-CANDIDATE-REVIEW.md).
 
 ENG-22: P2.1/P2.2 quick physical evidence supports balanced-soft/gpu as manual candidate (49.65 FPS), but frame cadence and P3 fail; no extra runtime change or default promotion. [Results](../PERFORMANCE-P2.1-P2.2.md).
+
+ENG-23: P3.1 proposed trace and instrumented/uninstrumented comparison at identical budgets; investigate mask ROI coverage without alpha parity regression. [Evidence](../PERFORMANCE-P3-EXTENDED.md).

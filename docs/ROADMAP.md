@@ -86,3 +86,5 @@ P2.1 auxiliary composition candidate before P3; compare same fish and habitat ba
 P2.2 local review candidate before P3; P2.1 CI green, physical evidence still pending. No production promotion or Driftwood yet.
 
 P2.1/P2.2 physical quick diagnostics analyzed; 49.65 FPS balanced-soft/gpu, not approved. Extended benchmark, visual review and P3 pending; Driftwood blocked. [Results](PERFORMANCE-P2.1-P2.2.md).
+
+P2.2 extended selection 52.27 FPS; P3 failed 49.63 FPS pooled. P3.1 diagnostic proposal; CI inspection-return regression investigation pending. Driftwood blocked.
