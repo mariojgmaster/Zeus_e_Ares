@@ -41,3 +41,5 @@ ENG-23: P3.1 proposed trace and instrumented/uninstrumented comparison at identi
 
 
 P3.1 candidate: paired full/light profiling and conservative disjoint mask ROI, trace markers and cadence correlation; inspection smoke synchronized with explicit states; no promotion or physical FPS claim. See [P3.1](../P3.1-FRAME-PACING.md).
+
+ENG-24: P3.1 physical diagnostic 51.57 FPS best, reference drift 38.75/59.90%, zero split planes across all samples. No promotion; compositor trace and controlled trial next. [Results](../PERFORMANCE-P3.1.md).

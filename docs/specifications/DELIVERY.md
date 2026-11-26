@@ -77,3 +77,5 @@ D-24: P2.2 extended candidate selected; P3 0/3, no release. Latest prior docs-on
 
 
 P3.1 candidate: paired full/light profiling and conservative disjoint mask ROI, trace markers and cadence correlation; inspection smoke synchronized with explicit states; no promotion or physical FPS claim. See [P3.1](../P3.1-FRAME-PACING.md).
+
+D-25: P3.1 CI 45758607846 PASS, physical report analyzed; improvement unproven, P3 still blocked. [Results](../PERFORMANCE-P3.1.md).

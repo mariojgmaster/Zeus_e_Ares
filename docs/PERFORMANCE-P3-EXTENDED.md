@@ -25,3 +25,5 @@ Earlier P2.2 runtime CI 45753291447 passed. Subsequent documentation-only head 7
 
 
 P3.1 candidate: paired full/light profiling and conservative disjoint mask ROI, trace markers and cadence correlation; inspection smoke synchronized with explicit states; no promotion or physical FPS claim. See [P3.1](P3.1-FRAME-PACING.md).
+
+P3.1 diagnostic received; no proof of optimization gain, next compositor trace and controlled comparisons. [Results](PERFORMANCE-P3.1.md).

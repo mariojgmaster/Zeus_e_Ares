@@ -56,3 +56,6 @@ P2.2 extended selection valid, P3 fails. Investigate instrumentation/compositor/
 
 
 P3.1 candidate: paired full/light profiling and conservative disjoint mask ROI, trace markers and cadence correlation; inspection smoke synchronized with explicit states; no promotion or physical FPS claim. See [P3.1](P3.1-FRAME-PACING.md).
+
+## P3.1 measured outcome
+No split activation and high drift; retain union, investigate browser compositor before additional changes. [Results](PERFORMANCE-P3.1.md).

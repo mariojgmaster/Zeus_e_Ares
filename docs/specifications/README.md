@@ -45,3 +45,5 @@ Toda nova decisão deve ter ID, descrição, critérios verificáveis, estado e 
 
 
 P3.1 candidate: paired full/light profiling and conservative disjoint mask ROI, trace markers and cadence correlation; inspection smoke synchronized with explicit states; no promotion or physical FPS claim. See [P3.1](../P3.1-FRAME-PACING.md).
+
+- [P3.1 physical frame pacing results](../PERFORMANCE-P3.1.md) — high drift, zero split activation, investigation priorities.
