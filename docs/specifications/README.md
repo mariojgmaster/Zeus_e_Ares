@@ -42,3 +42,6 @@ Toda nova decisão deve ter ID, descrição, critérios verificáveis, estado e 
 - [P2.1/P2.2 physical results](../PERFORMANCE-P2.1-P2.2.md) — optical and auxiliary paired comparisons.
 
 - [Extended P2.2/P3 results](../PERFORMANCE-P3-EXTENDED.md) — measured candidate, failed release gate, P3.1 proposal and CI caveat.
+
+
+P3.1 candidate: paired full/light profiling and conservative disjoint mask ROI, trace markers and cadence correlation; inspection smoke synchronized with explicit states; no promotion or physical FPS claim. See [P3.1](../P3.1-FRAME-PACING.md).

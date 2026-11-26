@@ -16,6 +16,19 @@ export function maskRegions(fish,rect,shift,w,h){
   return right>x&&bottom>y?[x,y,right-x,bottom-y]:null;
  });
 }
+// Same conservative projected bounds as the original. At most two non-overlapping scissors.
+export function smartMaskRegions(fish,rect,shift,w,h){
+ const baseline=maskRegions(fish,rect,shift,w,h);
+ const single=fish.map(f=>maskRegions([f],rect,shift,w,h));
+ return baseline.map((r,i)=>{
+  if(!r)return null;
+  const regions=single.map(p=>p[i]).filter(Boolean);
+  if(regions.length!==2)return [r];
+  const [a,b]=regions,area=x=>x[2]*x[3];
+  const overlap=a[0]<b[0]+b[2]&&b[0]<a[0]+a[2]&&a[1]<b[1]+b[3]&&b[1]<a[1]+a[3];
+  return !overlap&&area(a)+area(b)<=area(r)*.65?regions:[r];
+ });
+}
 export function overlapsRegion(rect,region,pad=24){return !!region&&rect[0]-pad<region[0]+region[2]&&rect[0]+rect[2]+pad>region[0]&&rect[1]-pad<region[1]+region[3]&&rect[1]+rect[3]+pad>region[1];}
 // Equal depth is in front of the corresponding photographic plane, matching the legacy mask contract.
 export function depthGroups(fish,occlusion=true){const sorted=[...fish].sort((a,b)=>a.z-b.z),groups=Array.from({length:PLANES.length+1},()=>[]);for(const f of sorted){let i=occlusion?PLANES.findIndex(z=>f.z<z):-1;if(i<0)i=PLANES.length;groups[i].push(f);}return groups;}
@@ -82,10 +95,11 @@ export function createLivingRenderer(gl,source,maskOnly=false){
  const view=z=>maskOnly?[0,0,1,1]:[rect.x+shift[0]*rect.dw*cameraFactor(z),rect.y+shift[1]*rect.dh*cameraFactor(z),rect.dw/w,rect.dh/h];
  const tint=z=>!optics.enabled?[0,0,0,0]:z===.7?[34/255,91/255,91/255,.16]:[39/255,101/255,99/255,[.14,.10,.065,.032][PLANES.indexOf(z)]];
  if(!maskOnly)quad(waterTex,[0,0,w,h],view(.7),[0,0,0,0],[h,h],tint(.7));
- let last=-1,region=null;stats.draws=0;stats.maskPixels=0;
+ let last=-1,region=null,scissors=[];stats.draws=0;stats.maskPixels=0;stats.splitPlanes=0;
  for(const {l,i,t,rect,amp,freq,phase} of (stats.retained?retainedItems:items)){
   if(ordered&&l.z!==.7)flushFish(PLANES.indexOf(l.z)+1);
-  if(maskOnly&&l.z!==last){last=l.z;const j=PLANES.indexOf(l.z);gl.colorMask(j===0,j===1,j===2,j===3);region=regions?regions[j]:[0,0,w,h];if(region){gl.enable(gl.SCISSOR_TEST);gl.scissor(...region);stats.maskPixels+=region[2]*region[3];}}
+  if(maskOnly&&l.z!==last){last=l.z;const j=PLANES.indexOf(l.z);gl.colorMask(j===0,j===1,j===2,j===3);const value=regions?regions[j]:[0,0,w,h];scissors=value?(Array.isArray(value[0])?value:[value]):[];region=scissors.length===1?scissors[0]:null;if(scissors.length){gl.enable(gl.SCISSOR_TEST);for(const s of scissors)stats.maskPixels+=s[2]*s[3];if(scissors.length===1)gl.scissor(...region);else stats.splitPlanes++;}}
+  if(maskOnly&&scissors.length>1){for(const s of scissors){if(!overlapsRegion(rect,s,40))continue;gl.scissor(...s);quad(t,rect,view(l.z),[amp,freq,phase,pose.wakes[i]??0],[l.y+l.h,l.h],tint(l.z));stats.draws++;}continue;}
   if(maskOnly&&(!region||!overlapsRegion(rect,region)))continue;
   quad(t,rect,view(l.z),[amp,freq,phase,pose.wakes[i]??0],[l.y+l.h,l.h],tint(l.z));stats.draws++;
  }flushFish(PLANES.length+1);stats.frames++;

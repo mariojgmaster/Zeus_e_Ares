@@ -38,3 +38,6 @@ ENG-21: P2.2 local review validates P2.1 actual settings and paired measurements
 ENG-22: P2.1/P2.2 quick physical evidence supports balanced-soft/gpu as manual candidate (49.65 FPS), but frame cadence and P3 fail; no extra runtime change or default promotion. [Results](../PERFORMANCE-P2.1-P2.2.md).
 
 ENG-23: P3.1 proposed trace and instrumented/uninstrumented comparison at identical budgets; investigate mask ROI coverage without alpha parity regression. [Evidence](../PERFORMANCE-P3-EXTENDED.md).
+
+
+P3.1 candidate: paired full/light profiling and conservative disjoint mask ROI, trace markers and cadence correlation; inspection smoke synchronized with explicit states; no promotion or physical FPS claim. See [P3.1](../P3.1-FRAME-PACING.md).
