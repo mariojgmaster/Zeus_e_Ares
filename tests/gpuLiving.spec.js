@@ -38,7 +38,7 @@ test('split GPU mask matches original inside individual fish bounds',async({page
   const p=blob(plant),q=blob(parallax.replace("'./livingVegetation.js'",JSON.stringify(p))),u=blob(gpu.replace("'./livingVegetation.js'",JSON.stringify(p)).replace("'./parallaxScene.js'",JSON.stringify(q)));
   const {createLivingRenderer,maskRegions,smartMaskRegions}=await import(u);
   const w=320,h=100,make=(width,height)=>Object.assign(document.createElement('canvas'),{width,height});
-  const sprites=[.83,.9,.97,1.065].flatMap((z,j)=>[0,1].map(i=>{const c=make(106,96),g=c.getContext('2d');g.fillStyle=i?'rgba(0,255,0,.65)':'rgba(255,0,0,.45)';g.fillRect(18,18,70,60);g.clearRect(36,30,12,14);return {l:{id:'p'+j+i,asset:'sprouts',x:12+i*60,y:10+j*2,w:70,h:60,z},c};}));
+  const sprites=[.83,.9,.97,1.065].flatMap((z,j)=>[0,1,2,3].map(i=>{const c=make(106,96),g=c.getContext('2d');g.fillStyle=i?'rgba(0,255,0,.65)':'rgba(255,0,0,.45)';g.fillRect(18,18,70,60);g.clearRect(36,30,12,14);return {l:{id:'p'+j+i,asset:'sprouts',x:12+(i%2)*15+Math.floor(i/2)*210,y:10+j*2,w:70,h:60,z},c};}));
   const canvas=make(w,h),gl=canvas.getContext('webgl',{alpha:true,antialias:false});if(!gl)throw Error('WebGL unavailable');const renderer=createLivingRenderer(gl,{w,h,sprites,water:make(w,h),optics:{}},true);
   const rect={x:0,y:0,dw:w,dh:h},shift=[.005,-.003],pose={time:3,flow:.8,wakes:sprites.map((_,i)=>i%2?.4:-.4)};
   const fish=[{x:45,y:48,z:.87,width:8},{x:265,y:48,z:.87,width:8}];const regions=maskRegions(fish,rect,shift,w,h),split=smartMaskRegions(fish,rect,shift,w,h);

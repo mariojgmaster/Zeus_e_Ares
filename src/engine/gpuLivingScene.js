@@ -98,8 +98,8 @@ export function createLivingRenderer(gl,source,maskOnly=false){
  let last=-1,region=null,scissors=[];stats.draws=0;stats.maskPixels=0;stats.splitPlanes=0;
  for(const {l,i,t,rect,amp,freq,phase} of (stats.retained?retainedItems:items)){
   if(ordered&&l.z!==.7)flushFish(PLANES.indexOf(l.z)+1);
-  if(maskOnly&&l.z!==last){last=l.z;const j=PLANES.indexOf(l.z);gl.colorMask(j===0,j===1,j===2,j===3);const value=regions?regions[j]:[0,0,w,h];scissors=value?(Array.isArray(value[0])?value:[value]):[];region=scissors.length===1?scissors[0]:null;if(scissors.length){gl.enable(gl.SCISSOR_TEST);for(const s of scissors)stats.maskPixels+=s[2]*s[3];if(scissors.length===1)gl.scissor(...region);else stats.splitPlanes++;}}
-  if(maskOnly&&scissors.length>1){for(const s of scissors){if(!overlapsRegion(rect,s,40))continue;gl.scissor(...s);quad(t,rect,view(l.z),[amp,freq,phase,pose.wakes[i]??0],[l.y+l.h,l.h],tint(l.z));stats.draws++;}continue;}
+  if(maskOnly&&l.z!==last){last=l.z;const j=PLANES.indexOf(l.z);gl.colorMask(j===0,j===1,j===2,j===3);const value=regions?regions[j]:[0,0,w,h];scissors=value?(Array.isArray(value[0])?value:[value]):[];region=scissors.length===1?scissors[0]:null;if(scissors.length===2){const [a,b]=scissors,x=Math.min(a[0],b[0]),y=Math.min(a[1],b[1]);region=[x,y,Math.max(a[0]+a[2],b[0]+b[2])-x,Math.max(a[1]+a[3],b[1]+b[3])-y];}if(scissors.length){gl.enable(gl.SCISSOR_TEST);for(const s of scissors)stats.maskPixels+=s[2]*s[3];if(scissors.length===1)gl.scissor(...region);else stats.splitPlanes++;}}
+  if(maskOnly&&scissors.length>1){if(!overlapsRegion(rect,region))continue;for(const s of scissors){if(!overlapsRegion(rect,s,40))continue;gl.scissor(...s);quad(t,rect,view(l.z),[amp,freq,phase,pose.wakes[i]??0],[l.y+l.h,l.h],tint(l.z));stats.draws++;}continue;}
   if(maskOnly&&(!region||!overlapsRegion(rect,region)))continue;
   quad(t,rect,view(l.z),[amp,freq,phase,pose.wakes[i]??0],[l.y+l.h,l.h],tint(l.z));stats.draws++;
  }flushFish(PLANES.length+1);stats.frames++;
