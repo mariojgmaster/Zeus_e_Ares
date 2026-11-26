@@ -76,3 +76,6 @@ Open /?candidate=1 (balanced + reference optics). Explicit profile and opticalMo
 
 ## P2.1 — Auxiliary Composition
 Open /?candidate=1&profile=balanced-soft for opt-in lighter tank effects, /?auxLab=1 for nine paired phases. Original candidate/default unchanged. [Spec](docs/P2.1-AUXILIARY-COMPOSITION.md).
+
+## P2.2 — Candidate Review
+/?auxLab=1 now summarizes paired results locally and accepts an existing P2.1 JSON. Extended profile required for a provisional recommendation; no automatic promotion. [Spec](docs/P2.2-CANDIDATE-REVIEW.md).

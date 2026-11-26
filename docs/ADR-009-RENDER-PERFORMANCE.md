@@ -44,3 +44,12 @@ Measured P1.2 balanced + reference optics, P1.3 optional pending physical report
 
 ## P2.1
 Before further migration, isolate auxiliary Canvas2D pixel cost at unchanged fish/habitat/foreground buffers; restore native on fallback. [P2.1](P2.1-AUXILIARY-COMPOSITION.md).
+
+## P2.2
+No new physical evidence; freeze speculative render changes. Local candidate comparison with conservative drift, gain and cadence guardrails, no automatic promotion. [P2.2](P2.2-CANDIDATE-REVIEW.md).
+
+## P2.1/P2.2 measurements
+Two short runs received; first drift too high, second within policy. GPU lightweight provisional priority, no default promotion. Next extended measurement and compositor trace if needed. [Results](PERFORMANCE-P2.1-P2.2.md).
+
+## P3 physical outcome and next investigation
+P2.2 extended selection valid, P3 fails. Investigate instrumentation/compositor/ROI correlation before new graphics changes. [Evidence](PERFORMANCE-P3-EXTENDED.md).

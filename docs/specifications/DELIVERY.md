@@ -68,3 +68,9 @@ D-19: user approved P1.3; candidate isolated, original default unchanged, physic
 D-20: user requested continuation; P2 consolidation and P3 diagnostic tooling candidate only. P1.3 hardware report outstanding, default production unchanged. Release approval and Driftwood blocked. [P2](../P2-PRODUCTION-RENDERER.md).
 
 D-21: P1.3 full CI passed, hardware report and release gate missing; user requested continuation. P2.1 experiment isolated, no production promotion or FPS claim. [P2.1](../P2.1-AUXILIARY-COMPOSITION.md).
+
+D-22: P2.1 full CI PASS; P2.2 tooling implemented, physical report still pending; no automatic approval or merge. [P2.2](../P2.2-CANDIDATE-REVIEW.md).
+
+D-23: two quick reports received; CI P2.1/P2.2 PASS. Extended benchmark and visual gate outstanding, no release approval. [Results](../PERFORMANCE-P2.1-P2.2.md).
+
+D-24: P2.2 extended candidate selected; P3 0/3, no release. Latest prior docs-only CI failed auxiliary inspection smoke; reproduce before promotion. [Evidence](../PERFORMANCE-P3-EXTENDED.md).
