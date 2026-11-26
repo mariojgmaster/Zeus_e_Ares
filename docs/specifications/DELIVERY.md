@@ -74,3 +74,11 @@ D-22: P2.1 full CI PASS; P2.2 tooling implemented, physical report still pending
 D-23: two quick reports received; CI P2.1/P2.2 PASS. Extended benchmark and visual gate outstanding, no release approval. [Results](../PERFORMANCE-P2.1-P2.2.md).
 
 D-24: P2.2 extended candidate selected; P3 0/3, no release. Latest prior docs-only CI failed auxiliary inspection smoke; reproduce before promotion. [Evidence](../PERFORMANCE-P3-EXTENDED.md).
+
+
+P3.1 candidate: paired full/light profiling and conservative disjoint mask ROI, trace markers and cadence correlation; inspection smoke synchronized with explicit states; no promotion or physical FPS claim. See [P3.1](../P3.1-FRAME-PACING.md).
+
+D-25: P3.1 CI 45758607846 PASS, physical report analyzed; improvement unproven, P3 still blocked. [Results](../PERFORMANCE-P3.1.md).
+
+
+Chrome trace evidence: normal candidate 59.81 animation callbacks/s, 58.48 presentation events/s (unique timestamps), ~24.54s, not P3 approval. Next minimal RAF-only comparison, no speculative compositor rewrite or quality reduction. [Trace analysis](../PERFORMANCE-CHROME-TRACE.md).

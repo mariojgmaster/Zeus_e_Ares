@@ -53,3 +53,12 @@ Two short runs received; first drift too high, second within policy. GPU lightwe
 
 ## P3 physical outcome and next investigation
 P2.2 extended selection valid, P3 fails. Investigate instrumentation/compositor/ROI correlation before new graphics changes. [Evidence](PERFORMANCE-P3-EXTENDED.md).
+
+
+P3.1 candidate: paired full/light profiling and conservative disjoint mask ROI, trace markers and cadence correlation; inspection smoke synchronized with explicit states; no promotion or physical FPS claim. See [P3.1](P3.1-FRAME-PACING.md).
+
+## P3.1 measured outcome
+No split activation and high drift; retain union, investigate browser compositor before additional changes. [Results](PERFORMANCE-P3.1.md).
+
+
+Chrome trace evidence: normal candidate 59.81 animation callbacks/s, 58.48 presentation events/s (unique timestamps), ~24.54s, not P3 approval. Next minimal RAF-only comparison, no speculative compositor rewrite or quality reduction. [Trace analysis](PERFORMANCE-CHROME-TRACE.md).

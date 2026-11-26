@@ -88,3 +88,11 @@ P2.2 local review candidate before P3; P2.1 CI green, physical evidence still pe
 P2.1/P2.2 physical quick diagnostics analyzed; 49.65 FPS balanced-soft/gpu, not approved. Extended benchmark, visual review and P3 pending; Driftwood blocked. [Results](PERFORMANCE-P2.1-P2.2.md).
 
 P2.2 extended selection 52.27 FPS; P3 failed 49.63 FPS pooled. P3.1 diagnostic proposal; CI inspection-return regression investigation pending. Driftwood blocked.
+
+
+P3.1 candidate: paired full/light profiling and conservative disjoint mask ROI, trace markers and cadence correlation; inspection smoke synchronized with explicit states; no promotion or physical FPS claim. See [P3.1](P3.1-FRAME-PACING.md).
+
+P3.1 CI green and diagnostic analyzed; no demonstrated speedup. P3.1.1 proposed controlled compositor investigation before P3.2. Driftwood blocked.
+
+
+Chrome trace evidence: normal candidate 59.81 animation callbacks/s, 58.48 presentation events/s (unique timestamps), ~24.54s, not P3 approval. Next minimal RAF-only comparison, no speculative compositor rewrite or quality reduction. [Trace analysis](PERFORMANCE-CHROME-TRACE.md).

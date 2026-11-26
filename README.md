@@ -79,3 +79,6 @@ Open /?candidate=1&profile=balanced-soft for opt-in lighter tank effects, /?auxL
 
 ## P2.2 — Candidate Review
 /?auxLab=1 now summarizes paired results locally and accepts an existing P2.1 JSON. Extended profile required for a provisional recommendation; no automatic promotion. [Spec](docs/P2.2-CANDIDATE-REVIEW.md).
+
+
+P3.1 candidate: paired full/light profiling and conservative disjoint mask ROI, trace markers and cadence correlation; inspection smoke synchronized with explicit states; no promotion or physical FPS claim. See [P3.1](docs/P3.1-FRAME-PACING.md). Open /?pacingLab=1; export aqua-frame-pacing-lab.json.
