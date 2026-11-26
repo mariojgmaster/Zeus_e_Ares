@@ -47,3 +47,6 @@ Toda nova decisão deve ter ID, descrição, critérios verificáveis, estado e 
 P3.1 candidate: paired full/light profiling and conservative disjoint mask ROI, trace markers and cadence correlation; inspection smoke synchronized with explicit states; no promotion or physical FPS claim. See [P3.1](../P3.1-FRAME-PACING.md).
 
 - [P3.1 physical frame pacing results](../PERFORMANCE-P3.1.md) — high drift, zero split activation, investigation priorities.
+
+
+Chrome trace evidence: normal candidate 59.81 animation callbacks/s, 58.48 presentation events/s (unique timestamps), ~24.54s, not P3 approval. Next minimal RAF-only comparison, no speculative compositor rewrite or quality reduction. [Trace analysis](../PERFORMANCE-CHROME-TRACE.md).

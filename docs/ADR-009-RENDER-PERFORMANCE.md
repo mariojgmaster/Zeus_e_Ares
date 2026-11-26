@@ -59,3 +59,6 @@ P3.1 candidate: paired full/light profiling and conservative disjoint mask ROI, 
 
 ## P3.1 measured outcome
 No split activation and high drift; retain union, investigate browser compositor before additional changes. [Results](PERFORMANCE-P3.1.md).
+
+
+Chrome trace evidence: normal candidate 59.81 animation callbacks/s, 58.48 presentation events/s (unique timestamps), ~24.54s, not P3 approval. Next minimal RAF-only comparison, no speculative compositor rewrite or quality reduction. [Trace analysis](PERFORMANCE-CHROME-TRACE.md).
