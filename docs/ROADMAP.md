@@ -82,3 +82,5 @@ P1.3 candidate: cache + GPU optical pass, eight-phase lab; P2/P3 and Driftwood s
 P2 candidate published with P3 validation harness; P1.3 physical evidence pending, P3 not approved, Driftwood blocked.
 
 P2.1 auxiliary composition candidate before P3; compare same fish and habitat backing, P1.3 results and visual gate still pending.
+
+P2.2 local review candidate before P3; P2.1 CI green, physical evidence still pending. No production promotion or Driftwood yet.

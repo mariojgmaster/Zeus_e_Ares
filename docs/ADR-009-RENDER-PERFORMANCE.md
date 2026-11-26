@@ -44,3 +44,6 @@ Measured P1.2 balanced + reference optics, P1.3 optional pending physical report
 
 ## P2.1
 Before further migration, isolate auxiliary Canvas2D pixel cost at unchanged fish/habitat/foreground buffers; restore native on fallback. [P2.1](P2.1-AUXILIARY-COMPOSITION.md).
+
+## P2.2
+No new physical evidence; freeze speculative render changes. Local candidate comparison with conservative drift, gain and cadence guardrails, no automatic promotion. [P2.2](P2.2-CANDIDATE-REVIEW.md).

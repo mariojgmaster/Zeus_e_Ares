@@ -9,3 +9,6 @@ Average >=59 FPS (tolerance for 59.94 Hz; goal 60); p95 <=20ms; p99 <=33.4ms; ze
 
 ## P2.1 auxiliary experiment
 Optional lighter tank buffer, P2 default unchanged; no physical report yet. [P2.1](P2.1-AUXILIARY-COMPOSITION.md).
+
+## P2.2 review tooling
+P2.1 CI passed; physical report pending. Local review and explicit provisional recommendation added, no default change. [P2.2](P2.2-CANDIDATE-REVIEW.md).

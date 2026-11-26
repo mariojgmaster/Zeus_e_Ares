@@ -36,3 +36,5 @@ Toda nova decisão deve ter ID, descrição, critérios verificáveis, estado e 
 - [P2 Production Renderer and P3 validation](../P2-PRODUCTION-RENDERER.md) — candidate, thresholds and soak.
 
 - [P2.1 Auxiliary Composition](../P2.1-AUXILIARY-COMPOSITION.md) — independent auxiliary surface experiment.
+
+- [P2.2 Candidate Review](../P2.2-CANDIDATE-REVIEW.md) — local evidence review and provisional selection.
