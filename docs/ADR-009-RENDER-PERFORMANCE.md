@@ -47,3 +47,6 @@ Before further migration, isolate auxiliary Canvas2D pixel cost at unchanged fis
 
 ## P2.2
 No new physical evidence; freeze speculative render changes. Local candidate comparison with conservative drift, gain and cadence guardrails, no automatic promotion. [P2.2](P2.2-CANDIDATE-REVIEW.md).
+
+## P2.1/P2.2 measurements
+Two short runs received; first drift too high, second within policy. GPU lightweight provisional priority, no default promotion. Next extended measurement and compositor trace if needed. [Results](PERFORMANCE-P2.1-P2.2.md).

@@ -12,3 +12,6 @@ Optional lighter tank buffer, P2 default unchanged; no physical report yet. [P2.
 
 ## P2.2 review tooling
 P2.1 CI passed; physical report pending. Local review and explicit provisional recommendation added, no default change. [P2.2](P2.2-CANDIDATE-REVIEW.md).
+
+## Physical follow-up
+Provisional test priority balanced-soft/gpu, 49.65 FPS best quick result. Default unchanged; P3 numerical gate unmet. [Results](PERFORMANCE-P2.1-P2.2.md).
