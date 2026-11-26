@@ -12,3 +12,5 @@ PRD-07: controles responsivos, acessíveis por teclado, estados aria-pressed, re
 Comparar referências originais e última homologada em desktop 1280×720 e 1920×1080, mobile 390×844, dia/noite, observação e imersão; sem alteração indevida de cor/forma, recortes, deformações artificiais, saltos, travamentos ou perda de funcionalidade. Não aprovar qualidade visual apenas por testes automatizados.
 
 PRD-08: tela de carregamento minimalista, elegante, identidade Aqua Eterna, sem aquário incompleto; espera recursos e primeiro quadro, bloqueia interação, respeita redução de movimento, erro recuperável com retry.
+
+PRD-09: candidate graphics profile explicit, no silent resolution downgrade; actual renderer/fallback status shown. Numerical benchmark never substitutes visual and functional release homologation.

@@ -32,3 +32,5 @@ Toda nova decisão deve ter ID, descrição, critérios verificáveis, estado e 
 - [P1.2 physical results](../PERFORMANCE-P1.2.md) — paired cache and independent budgets, optical strategy.
 
 - [P1.3 Optimized Optical Engine](../P1.3-OPTIMIZED-OPTICS.md) — optical cache, GPU composition and paired lab.
+
+- [P2 Production Renderer and P3 validation](../P2-PRODUCTION-RENDERER.md) — candidate, thresholds and soak.

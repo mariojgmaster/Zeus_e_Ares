@@ -64,3 +64,5 @@ D-17: user approved P1.2. Candidate published separately, original Max default u
 D-18: P1.2 CI passed, quick hardware report received and analyzed; best 45.81 FPS, zero >50ms in short sample. Performance gate remains open and visual approval absent. P1.3 proposed, no implementation or merge. [Results](../PERFORMANCE-P1.2.md).
 
 D-19: user approved P1.3; candidate isolated, original default unchanged, physical and visual gate pending. [P1.3](../P1.3-OPTIMIZED-OPTICS.md).
+
+D-20: user requested continuation; P2 consolidation and P3 diagnostic tooling candidate only. P1.3 hardware report outstanding, default production unchanged. Release approval and Driftwood blocked. [P2](../P2-PRODUCTION-RENDERER.md).

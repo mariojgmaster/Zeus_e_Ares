@@ -78,3 +78,5 @@ P1.2 candidate: retained GPU Living with independent surface budgets and paired 
 P1.2 quick diagnostic analyzed (45.81 FPS balanced, 45.58 native-soft). P1.3 proposed: optimized optical passes, same-buffer comparison, visual parity; no release approval. [Results](PERFORMANCE-P1.2.md).
 
 P1.3 candidate: cache + GPU optical pass, eight-phase lab; P2/P3 and Driftwood still blocked pending visual/performance evidence.
+
+P2 candidate published with P3 validation harness; P1.3 physical evidence pending, P3 not approved, Driftwood blocked.

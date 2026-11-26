@@ -38,3 +38,6 @@ Independent surface budgets are the strongest measured improvement; cache-only d
 
 ## P1.3 implementation
 Opt-in cached optical primitives and same-context GPU base lighting, reference/cache/GPU comparison. No further reduction in fish or scene backing. [P1.3](P1.3-OPTIMIZED-OPTICS.md).
+
+## P2 candidate
+Measured P1.2 balanced + reference optics, P1.3 optional pending physical report. Explicit candidate route and P3 performance gate harness; no default promotion. [P2](P2-PRODUCTION-RENDERER.md).
