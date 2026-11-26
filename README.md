@@ -73,3 +73,6 @@ Open /?optical=1 (balanced) or &profile=detail/native/max. Select original/cache
 
 ## P2 release candidate
 Open /?candidate=1 (balanced + reference optics). Explicit profile and opticalMode query options. /?releaseLab=1 runs 3×30s with warmups; append &soak=1 for 15min soak. Normal / unchanged. [Spec](docs/P2-PRODUCTION-RENDERER.md).
+
+## P2.1 — Auxiliary Composition
+Open /?candidate=1&profile=balanced-soft for opt-in lighter tank effects, /?auxLab=1 for nine paired phases. Original candidate/default unchanged. [Spec](docs/P2.1-AUXILIARY-COMPOSITION.md).

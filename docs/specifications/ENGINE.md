@@ -30,3 +30,5 @@ ENG-17: P1.2 balanced 45.81 FPS, native-soft 45.58; retained native 38.14. Cache
 ENG-18: bounded optical cache, same-context GPU premultiplied screen light pass, original fallback and paired measurements, retain foreground order and fish budgets. [P1.3](../P1.3-OPTIMIZED-OPTICS.md).
 
 ENG-19: opt-in P2 candidate uses balanced GPU Living retained reference optics; actual fallback status; P3 triple 30s and 15min soak diagnostics, explicit quantitative gates, no automated product approval. [P2](../P2-PRODUCTION-RENDERER.md).
+
+ENG-20: optional auxiliary tank half-native linear scale only in GPU Living, original profile restoration for fallback, lazy base bitmap; paired optical/buffer benchmark. [P2.1](../P2.1-AUXILIARY-COMPOSITION.md).

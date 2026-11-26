@@ -80,3 +80,5 @@ P1.2 quick diagnostic analyzed (45.81 FPS balanced, 45.58 native-soft). P1.3 pro
 P1.3 candidate: cache + GPU optical pass, eight-phase lab; P2/P3 and Driftwood still blocked pending visual/performance evidence.
 
 P2 candidate published with P3 validation harness; P1.3 physical evidence pending, P3 not approved, Driftwood blocked.
+
+P2.1 auxiliary composition candidate before P3; compare same fish and habitat backing, P1.3 results and visual gate still pending.
