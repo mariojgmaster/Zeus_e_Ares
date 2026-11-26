@@ -82,3 +82,6 @@ Open /?candidate=1&profile=balanced-soft for opt-in lighter tank effects, /?auxL
 
 
 P3.1 candidate: paired full/light profiling and conservative disjoint mask ROI, trace markers and cadence correlation; inspection smoke synchronized with explicit states; no promotion or physical FPS claim. See [P3.1](docs/P3.1-FRAME-PACING.md). Open /?pacingLab=1; export aqua-frame-pacing-lab.json.
+
+
+P3.1.2 candidate: minimal numeric RAF collector, mirrored full/light/minimal comparison, explicit minimal release route with unchanged P3 thresholds. No renderer promotion or measured gain. Open /?minimalLab=1; export aqua-minimal-lab.json. [Specification](docs/P3.1.2-MINIMAL-INSTRUMENTATION.md).

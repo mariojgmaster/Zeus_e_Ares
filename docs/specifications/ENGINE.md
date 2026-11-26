@@ -46,3 +46,6 @@ ENG-24: P3.1 physical diagnostic 51.57 FPS best, reference drift 38.75/59.90%, z
 
 
 Chrome trace evidence: normal candidate 59.81 animation callbacks/s, 58.48 presentation events/s (unique timestamps), ~24.54s, not P3 approval. Next minimal RAF-only comparison, no speculative compositor rewrite or quality reduction. [Trace analysis](../PERFORMANCE-CHROME-TRACE.md).
+
+
+P3.1.2 candidate: minimal numeric RAF collector, mirrored full/light/minimal comparison, explicit minimal release route with unchanged P3 thresholds. No renderer promotion or measured gain. [Specification](../P3.1.2-MINIMAL-INSTRUMENTATION.md).
