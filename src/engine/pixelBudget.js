@@ -25,6 +25,8 @@ export const retainedProfiles=Object.freeze({
  native:Object.freeze({scale:'native',habitat:'native',fish:'native',foreground:'native'}),
  balanced:Object.freeze({scale:'native',habitat:'native',fish:.5,foreground:'native-half'}),
  detail:Object.freeze({scale:'native',habitat:'native',fish:.75,foreground:'native-half'}),
+ 'balanced-soft':Object.freeze({scale:'native-half',habitat:'native',fish:.5,foreground:'native-half'}),
+ 'detail-soft':Object.freeze({scale:'native-half',habitat:'native',fish:.75,foreground:'native-half'}),
  max:Object.freeze({scale:1,habitat:1,fish:1,foreground:1})
 });
 const scenario=(id,p,retained)=>Object.freeze({id,mode:'living-animated',...p,retained,optics:true});
@@ -49,6 +51,19 @@ export const opticalScenarios=Object.freeze([
  opticalScenario('detail-gpu',retainedProfiles.detail,'gpu'),
  opticalScenario('balanced-reference-repeat',retainedProfiles.balanced,'reference')
 ]);
+// Same fish, habitat and foreground buffers in each pair; only tank effects backing varies.
+export const auxiliaryScenarios=Object.freeze([
+ opticalScenario('balanced-reference',retainedProfiles.balanced,'reference'),
+ opticalScenario('balanced-aux-reference',retainedProfiles['balanced-soft'],'reference'),
+ opticalScenario('balanced-cached',retainedProfiles.balanced,'cached'),
+ opticalScenario('balanced-aux-cached',retainedProfiles['balanced-soft'],'cached'),
+ opticalScenario('balanced-gpu',retainedProfiles.balanced,'gpu'),
+ opticalScenario('balanced-aux-gpu',retainedProfiles['balanced-soft'],'gpu'),
+ opticalScenario('detail-gpu',retainedProfiles.detail,'gpu'),
+ opticalScenario('detail-aux-gpu',retainedProfiles['detail-soft'],'gpu'),
+ opticalScenario('balanced-reference-repeat',retainedProfiles.balanced,'reference')
+]);
+export function tankScaleForMode(scale,living){return scale==='native-half'&&!living?'native':scale;}
 export function expectedMode(mode){return mode.startsWith('unified')?'unified':mode.startsWith('living')?'living':mode==='gpu-static'?'gpu-static':'original';}
 export function matchesBuffers(surfaces,scenario,width,height,baseDpr){
  const full=pixelBudget(width,height,baseDpr,scenario.scale),front=pixelBudget(width,height,baseDpr,scenario.foreground),fish=pixelBudget(width,height,baseDpr,scenario.fish??scenario.scale),habitat=pixelBudget(width,height,baseDpr,scenario.habitat??scenario.scale);
