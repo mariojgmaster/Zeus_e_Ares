@@ -28,3 +28,5 @@ ENG-16: P1.2 opt-in retained static runs; no crossing plants/depth, bounded unio
 ENG-17: P1.2 balanced 45.81 FPS, native-soft 45.58; retained native 38.14. Cache-only gains small, color GPU time essentially unchanged at native; foreground half-native area is leading opportunity. P1.3 optics proposal; no lower fish/scene budgets without approval. [Results](../PERFORMANCE-P1.2.md).
 
 ENG-18: bounded optical cache, same-context GPU premultiplied screen light pass, original fallback and paired measurements, retain foreground order and fish budgets. [P1.3](../P1.3-OPTIMIZED-OPTICS.md).
+
+ENG-19: opt-in P2 candidate uses balanced GPU Living retained reference optics; actual fallback status; P3 triple 30s and 15min soak diagnostics, explicit quantitative gates, no automated product approval. [P2](../P2-PRODUCTION-RENDERER.md).

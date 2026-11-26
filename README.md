@@ -70,3 +70,6 @@ Open /?retained=1&profile=balanced (or native, detail, max). Compare cache ON/OF
 
 ## P1.3 — Optimized Optical Engine
 Open /?optical=1 (balanced) or &profile=detail/native/max. Select original/cache/GPU optics. /?opticalLab=1 exports paired eight-phase JSON. Normal / unchanged. [Spec](docs/P1.3-OPTIMIZED-OPTICS.md).
+
+## P2 release candidate
+Open /?candidate=1 (balanced + reference optics). Explicit profile and opticalMode query options. /?releaseLab=1 runs 3×30s with warmups; append &soak=1 for 15min soak. Normal / unchanged. [Spec](docs/P2-PRODUCTION-RENDERER.md).
