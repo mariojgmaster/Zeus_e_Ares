@@ -38,6 +38,17 @@ export const retainedScenarios=Object.freeze([
  scenario('reference-max',retainedProfiles.max,false),
  scenario('retained-max',retainedProfiles.max,true)
 ]);
+const opticalScenario=(id,p,opticalMode)=>Object.freeze({...p,id,mode:'living-animated',retained:true,optics:true,opticalMode});
+export const opticalScenarios=Object.freeze([
+ opticalScenario('balanced-reference',retainedProfiles.balanced,'reference'),
+ opticalScenario('balanced-cached',retainedProfiles.balanced,'cached'),
+ opticalScenario('balanced-gpu',retainedProfiles.balanced,'gpu'),
+ opticalScenario('native-soft-reference',{...retainedProfiles.native,foreground:'native-half'},'reference'),
+ opticalScenario('native-soft-gpu',{...retainedProfiles.native,foreground:'native-half'},'gpu'),
+ opticalScenario('detail-reference',retainedProfiles.detail,'reference'),
+ opticalScenario('detail-gpu',retainedProfiles.detail,'gpu'),
+ opticalScenario('balanced-reference-repeat',retainedProfiles.balanced,'reference')
+]);
 export function expectedMode(mode){return mode.startsWith('unified')?'unified':mode.startsWith('living')?'living':mode==='gpu-static'?'gpu-static':'original';}
 export function matchesBuffers(surfaces,scenario,width,height,baseDpr){
  const full=pixelBudget(width,height,baseDpr,scenario.scale),front=pixelBudget(width,height,baseDpr,scenario.foreground),fish=pixelBudget(width,height,baseDpr,scenario.fish??scenario.scale),habitat=pixelBudget(width,height,baseDpr,scenario.habitat??scenario.scale);

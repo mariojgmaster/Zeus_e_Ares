@@ -67,3 +67,6 @@ Open /?pixelLab=1, choose quick or extended, run and export JSON. Same viewport,
 
 ## P1.2 — Intelligent Retained
 Open /?retained=1&profile=balanced (or native, detail, max). Compare cache ON/OFF at same resolution. /?retainedLab=1 exports eight-profile JSON. Normal / unchanged. [Spec](docs/P1.2-INTELLIGENT-RETAINED.md).
+
+## P1.3 — Optimized Optical Engine
+Open /?optical=1 (balanced) or &profile=detail/native/max. Select original/cache/GPU optics. /?opticalLab=1 exports paired eight-phase JSON. Normal / unchanged. [Spec](docs/P1.3-OPTIMIZED-OPTICS.md).
